@@ -3,14 +3,15 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { type HTMLAttributes } from "react";
 
 const badgeVariants = cva(
-  "inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold transition-colors",
+  "inline-flex items-center rounded-full px-3 py-1 text-xs font-bold tracking-wide transition-colors",
   {
     variants: {
       variant: {
-        default: "bg-gray-100 text-gray-800",
-        success: "bg-green-100 text-green-800",
-        warning: "bg-amber-100 text-amber-800",
-        danger: "bg-red-100 text-red-800",
+        default: "bg-[#f1f5f9] text-[#64748b]",
+        success: "bg-[#ecfdf5] text-[#059669] ring-1 ring-inset ring-[#059669]/20",
+        warning: "bg-[#fffbeb] text-[#d97706] ring-1 ring-inset ring-[#d97706]/20",
+        danger: "bg-[#fef2f2] text-[#dc2626] ring-1 ring-inset ring-[#dc2626]/20",
+        primary: "bg-[#c7eafb] text-[#004071]",
       },
     },
     defaultVariants: {

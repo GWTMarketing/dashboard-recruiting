@@ -14,7 +14,7 @@ import type { BudgetMetrics, AdPerformance, TrendComparison } from "@/types/meta
 import type { PerspectiveFunnelKPIs } from "@/types/perspective";
 
 export const dynamic = "force-dynamic";
-export const revalidate = 900; // 15 minutes ISR
+export const revalidate = 900;
 
 interface DashboardData {
   metrics: BudgetMetrics | null;
@@ -50,7 +50,6 @@ async function getDashboardData(): Promise<DashboardData> {
     result.ads = ads;
     result.funnels = funnels;
 
-    // Calculate trends
     const weeklyData = parseTrendData(weeklyRows);
     const monthlyData = parseTrendData(monthlyRows);
 
@@ -81,24 +80,33 @@ export default async function DashboardPage() {
   const now = formatDate(new Date());
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-[#f8fafc]">
       {/* Header */}
-      <header className="bg-white border-b border-gray-200 sticky top-0 z-10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
-          <div>
-            <h1 className="text-xl font-bold text-gray-900">
-              {UI_STRINGS.title}
-            </h1>
-            <p className="text-sm text-gray-500">{UI_STRINGS.subtitle}</p>
+      <header className="bg-[#004071] sticky top-0 z-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex items-center justify-between">
+          <div className="flex items-center gap-4">
+            <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-white/10 backdrop-blur-sm">
+              <span className="text-sm font-black text-white tracking-tight">
+                GWT
+              </span>
+            </div>
+            <div>
+              <h1 className="text-base font-extrabold text-white tracking-tight">
+                {UI_STRINGS.title}
+              </h1>
+              <p className="text-xs text-[#c7eafb] font-medium">
+                {UI_STRINGS.subtitle}
+              </p>
+            </div>
           </div>
           <RefreshButton />
         </div>
       </header>
 
       {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
         {error && (
-          <div className="rounded-lg bg-red-50 border border-red-200 p-4 text-sm text-red-700">
+          <div className="rounded-2xl bg-[#fef2f2] border border-[#dc2626]/10 px-5 py-4 text-sm font-medium text-[#dc2626]">
             {error}
           </div>
         )}
@@ -125,9 +133,14 @@ export default async function DashboardPage() {
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-gray-200 bg-white mt-8">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 text-center text-xs text-gray-400">
-          {UI_STRINGS.lastUpdated}: {now}
+      <footer className="border-t border-[rgba(0,64,113,0.06)] mt-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex items-center justify-between">
+          <p className="text-[10px] font-bold uppercase tracking-widest text-[#94a3b8]">
+            {UI_STRINGS.lastUpdated}: {now}
+          </p>
+          <p className="text-[10px] font-bold uppercase tracking-widest text-[#c7eafb]">
+            GWT Group
+          </p>
         </div>
       </footer>
     </div>

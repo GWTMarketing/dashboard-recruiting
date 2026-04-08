@@ -1,6 +1,6 @@
 export const UI_STRINGS = {
-  title: "Recruiting Dashboard",
-  subtitle: "Meta Ads Uebersicht",
+  title: "Dashboard GWT Group",
+  subtitle: "Recruiting Ads",
   login: {
     title: "Anmelden",
     password: "Passwort",
@@ -46,6 +46,9 @@ export const UI_STRINGS = {
     costPerResult: "Kosten / Ergebnis",
     spend: "Ausgaben",
     results: "Ergebnisse",
+    filter: "Filtern",
+    allCampaigns: "Alle Kampagnen",
+    search: "Anzeige suchen...",
   },
   perspective: {
     title: "Perspective Funnels",
@@ -55,7 +58,7 @@ export const UI_STRINGS = {
     visitors: "Besucher",
     bounceRate: "Absprungrate",
   },
-  refresh: "Daten aktualisieren",
+  refresh: "Aktualisieren",
   lastUpdated: "Letzte Aktualisierung",
   loading: "Laden...",
   error: "Fehler beim Laden der Daten",
