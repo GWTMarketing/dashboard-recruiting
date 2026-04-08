@@ -25,9 +25,9 @@ export function RefreshButton() {
     <button
       onClick={handleRefresh}
       disabled={loading}
-      className="inline-flex items-center gap-2 rounded-lg bg-white border border-gray-200 px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50 transition-colors"
+      className="inline-flex items-center gap-2 rounded-xl bg-[#004071] px-4 py-2.5 text-xs font-bold text-white hover:bg-[#005e9e] focus:outline-none focus:ring-2 focus:ring-[#004071]/30 focus:ring-offset-2 disabled:opacity-50 transition-all tracking-wide uppercase"
     >
-      <RefreshCw className={`h-4 w-4 ${loading ? "animate-spin" : ""}`} />
+      <RefreshCw className={`h-3.5 w-3.5 ${loading ? "animate-spin" : ""}`} />
       {UI_STRINGS.refresh}
     </button>
   );

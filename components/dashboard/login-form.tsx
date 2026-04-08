@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { UI_STRINGS } from "@/lib/constants";
 
 export function LoginForm() {
@@ -38,18 +37,30 @@ export function LoginForm() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 p-4">
-      <Card className="w-full max-w-sm">
-        <CardHeader className="text-center">
-          <CardTitle className="text-2xl">{UI_STRINGS.title}</CardTitle>
-          <p className="text-sm text-gray-500 mt-1">{UI_STRINGS.login.title}</p>
-        </CardHeader>
-        <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-4">
+    <div className="min-h-screen flex items-center justify-center bg-[#f8fafc] p-4">
+      <div className="w-full max-w-sm">
+        {/* Logo / Title */}
+        <div className="text-center mb-10">
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-[#004071] mb-6 shadow-lg shadow-[#004071]/20">
+            <span className="text-xl font-black text-white tracking-tight">
+              GWT
+            </span>
+          </div>
+          <h1 className="text-2xl font-extrabold text-[#004071] tracking-tight">
+            {UI_STRINGS.title}
+          </h1>
+          <p className="text-sm text-[#94a3b8] mt-1 font-medium">
+            {UI_STRINGS.subtitle}
+          </p>
+        </div>
+
+        {/* Form */}
+        <div className="rounded-2xl bg-white border border-[rgba(0,64,113,0.08)] shadow-[0_1px_3px_rgba(0,64,113,0.04),0_8px_24px_rgba(0,64,113,0.06)] p-8">
+          <form onSubmit={handleSubmit} className="space-y-5">
             <div>
               <label
                 htmlFor="password"
-                className="block text-sm font-medium text-gray-700 mb-1"
+                className="block text-[10px] font-bold uppercase tracking-widest text-[#64748b] mb-2"
               >
                 {UI_STRINGS.login.password}
               </label>
@@ -58,24 +69,26 @@ export function LoginForm() {
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full rounded-xl border border-[rgba(0,64,113,0.12)] bg-[#f8fafc] px-4 py-3 text-sm font-medium text-[#1a1a2e] focus:outline-none focus:ring-2 focus:ring-[#004071]/20 focus:border-[#004071]/30 focus:bg-white transition-all placeholder:text-[#94a3b8]"
                 required
                 autoFocus
               />
             </div>
             {error && (
-              <p className="text-sm text-red-600">{error}</p>
+              <div className="rounded-xl bg-[#fef2f2] px-4 py-2.5 text-xs font-bold text-[#dc2626]">
+                {error}
+              </div>
             )}
             <button
               type="submit"
               disabled={loading}
-              className="w-full rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full rounded-xl bg-[#004071] px-4 py-3 text-sm font-bold text-white hover:bg-[#005e9e] focus:outline-none focus:ring-2 focus:ring-[#004071]/30 focus:ring-offset-2 disabled:opacity-50 transition-all tracking-wide"
             >
               {loading ? UI_STRINGS.loading : UI_STRINGS.login.submit}
             </button>
           </form>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
     </div>
   );
 }

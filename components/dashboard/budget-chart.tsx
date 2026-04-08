@@ -31,9 +31,13 @@ function CustomTooltip({
 }) {
   if (!active || !payload?.length) return null;
   return (
-    <div className="rounded-lg bg-white border border-gray-200 p-3 shadow-lg">
-      <p className="text-sm font-medium text-gray-900">{label}</p>
-      <p className="text-sm text-blue-600">{formatCurrency(payload[0].value)}</p>
+    <div className="rounded-xl bg-[#004071] px-4 py-3 shadow-xl">
+      <p className="text-xs font-bold text-[#c7eafb] uppercase tracking-wider">
+        {label}
+      </p>
+      <p className="text-base font-extrabold text-white mt-0.5">
+        {formatCurrency(payload[0].value)}
+      </p>
     </div>
   );
 }
@@ -42,40 +46,56 @@ export function BudgetChart({ monthlyData, targetMonthly }: BudgetChartProps) {
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="text-lg">{UI_STRINGS.chart.title}</CardTitle>
+        <CardTitle>{UI_STRINGS.chart.title}</CardTitle>
       </CardHeader>
       <CardContent>
-        <div className="h-[300px] w-full">
+        <div className="h-[320px] w-full">
           <ResponsiveContainer width="100%" height="100%">
-            <BarChart data={monthlyData} margin={{ top: 5, right: 20, left: 20, bottom: 5 }}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
+            <BarChart
+              data={monthlyData}
+              margin={{ top: 8, right: 8, left: 8, bottom: 4 }}
+            >
+              <CartesianGrid
+                strokeDasharray="3 3"
+                stroke="rgba(0,64,113,0.06)"
+                vertical={false}
+              />
               <XAxis
                 dataKey="month"
-                tick={{ fontSize: 12 }}
-                stroke="#9ca3af"
+                tick={{ fontSize: 11, fontWeight: 600, fill: "#94a3b8" }}
+                stroke="transparent"
+                tickLine={false}
               />
               <YAxis
-                tick={{ fontSize: 12 }}
-                stroke="#9ca3af"
+                tick={{ fontSize: 11, fontWeight: 600, fill: "#94a3b8" }}
+                stroke="transparent"
+                tickLine={false}
                 tickFormatter={(v) => `${(v / 1000).toFixed(0)}k`}
+                width={40}
               />
-              <Tooltip content={<CustomTooltip />} />
+              <Tooltip
+                content={<CustomTooltip />}
+                cursor={{ fill: "rgba(0,64,113,0.04)", radius: 8 }}
+              />
               <ReferenceLine
                 y={targetMonthly}
-                stroke="#ef4444"
-                strokeDasharray="5 5"
+                stroke="#dc2626"
+                strokeDasharray="6 4"
+                strokeWidth={1.5}
                 label={{
                   value: UI_STRINGS.chart.targetLine,
                   position: "right",
-                  fill: "#ef4444",
-                  fontSize: 12,
+                  fill: "#dc2626",
+                  fontSize: 11,
+                  fontWeight: 600,
                 }}
               />
               <Bar
                 dataKey="spend"
                 name={UI_STRINGS.chart.spend}
-                fill="#3b82f6"
-                radius={[4, 4, 0, 0]}
+                fill="#004071"
+                radius={[6, 6, 0, 0]}
+                maxBarSize={48}
               />
             </BarChart>
           </ResponsiveContainer>
