@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="de" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Willkommen bei {{firma_name}}</title>
+    <!--[if mso]>
+    <noscript>
+        <xml>
+            <o:OfficeDocumentSettings>
+                <o:PixelsPerInch>96</o:PixelsPerInch>
+            </o:OfficeDocumentSettings>
+        </xml>
+    </noscript>
+    <![endif]-->
+</head>
+<body style="margin: 0; padding: 0; background-color: #f5f7fa; font-family: 'Mulish', Arial, Helvetica, sans-serif; -webkit-font-smoothing: antialiased;">
+
+    <!-- Aeusserer Container -->
+    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color: #f5f7fa;">
+        <tr>
+            <td align="center" style="padding: 40px 20px;">
+
+                <!-- Hauptcontainer (max. 600px) -->
+                <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="600" style="max-width: 600px; width: 100%; background-color: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06);">
+
+                    <!-- Header -->
+                    <tr>
+                        <td style="background-color: #004071; padding: 32px 40px; text-align: center;">
+                            <!-- Logo-Platzhalter: Hier kann das Firmenlogo als <img> eingefuegt werden -->
+                            <h1 style="margin: 0; color: #ffffff; font-family: 'Mulish', Arial, Helvetica, sans-serif; font-size: 24px; font-weight: 700; letter-spacing: 0.5px;">
+                                {{firma_name}}
+                            </h1>
+                            <p style="margin: 8px 0 0; color: #c7eafb; font-family: 'Mulish', Arial, Helvetica, sans-serif; font-size: 14px; font-weight: 400;">
+                                Intranet
+                            </p>
+                        </td>
+                    </tr>
+
+                    <!-- Willkommens-Bereich -->
+                    <tr>
+                        <td style="padding: 40px 40px 24px;">
+                            <h2 style="margin: 0 0 16px; color: #004071; font-family: 'Mulish', Arial, Helvetica, sans-serif; font-size: 22px; font-weight: 700;">
+                                Willkommen, {{vorname}}!
+                            </h2>
+                            <p style="margin: 0 0 16px; color: #2d3748; font-family: 'Mulish', Arial, Helvetica, sans-serif; font-size: 15px; line-height: 1.6;">
+                                Wir freuen uns, dich im Team begruessen zu duerfen! Ab sofort hast du Zugang zu unserem Intranet &ndash; deiner zentralen Anlaufstelle fuer Neuigkeiten, Dokumente und Kontakte.
+                            </p>
+                        </td>
+                    </tr>
+
+                    <!-- Zugangsdaten-Box -->
+                    <tr>
+                        <td style="padding: 0 40px 24px;">
+                            <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color: #f5f7fa; border-radius: 8px; border: 1px solid #e2e8f0;">
+                                <tr>
+                                    <td style="padding: 24px;">
+                                        <h3 style="margin: 0 0 16px; color: #004071; font-family: 'Mulish', Arial, Helvetica, sans-serif; font-size: 16px; font-weight: 700;">
+                                            Deine Zugangsdaten
+                                        </h3>
+
+                                        <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                                            <tr>
+                                                <td style="padding: 4px 0; color: #718096; font-family: 'Mulish', Arial, Helvetica, sans-serif; font-size: 13px; width: 120px; vertical-align: top;">
+                                                    Intranet-URL:
+                                                </td>
+                                                <td style="padding: 4px 0; color: #2d3748; font-family: 'Mulish', Arial, Helvetica, sans-serif; font-size: 13px; font-weight: 600;">
+                                                    <a href="{{intranet_url}}" style="color: #005e9e; text-decoration: none;">{{intranet_url}}</a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding: 4px 0; color: #718096; font-family: 'Mulish', Arial, Helvetica, sans-serif; font-size: 13px; vertical-align: top;">
+                                                    Benutzername:
+                                                </td>
+                                                <td style="padding: 4px 0; color: #2d3748; font-family: 'Mulish', Arial, Helvetica, sans-serif; font-size: 13px; font-weight: 600;">
+                                                    {{benutzername}}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding: 4px 0; color: #718096; font-family: 'Mulish', Arial, Helvetica, sans-serif; font-size: 13px; vertical-align: top;">
+                                                    Passwort:
+                                                </td>
+                                                <td style="padding: 4px 0; color: #2d3748; font-family: 'Mulish', Arial, Helvetica, sans-serif; font-size: 13px; font-weight: 600;">
+                                                    <code style="background: #ffffff; padding: 2px 8px; border-radius: 4px; border: 1px solid #e2e8f0; font-family: 'Courier New', monospace; font-size: 13px; letter-spacing: 0.5px;">{{passwort}}</code>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+
+                    <!-- Passwort-Hinweis -->
+                    <tr>
+                        <td style="padding: 0 40px 24px;">
+                            <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color: #fffbeb; border-radius: 8px; border-left: 4px solid #ed8936;">
+                                <tr>
+                                    <td style="padding: 16px 20px;">
+                                        <p style="margin: 0; color: #744210; font-family: 'Mulish', Arial, Helvetica, sans-serif; font-size: 13px; line-height: 1.5;">
+                                            <strong>Wichtig:</strong> Bitte aendere dein Passwort beim ersten Login unter Profil &rarr; Passwort aendern.
+                                        </p>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+
+                    <!-- CTA Button -->
+                    <tr>
+                        <td style="padding: 0 40px 32px; text-align: center;">
+                            <table role="presentation" cellspacing="0" cellpadding="0" border="0" align="center">
+                                <tr>
+                                    <td style="background-color: #005e9e; border-radius: 8px;">
+                                        <a href="{{intranet_url}}" target="_blank" style="display: inline-block; padding: 14px 32px; color: #ffffff; font-family: 'Mulish', Arial, Helvetica, sans-serif; font-size: 15px; font-weight: 700; text-decoration: none; text-align: center;">
+                                            Zum Intranet &rarr;
+                                        </a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+
+                    <!-- Trennlinie -->
+                    <tr>
+                        <td style="padding: 0 40px;">
+                            <hr style="border: none; border-top: 1px solid #e2e8f0; margin: 0;">
+                        </td>
+                    </tr>
+
+                    <!-- Erste Schritte -->
+                    <tr>
+                        <td style="padding: 24px 40px;">
+                            <h3 style="margin: 0 0 16px; color: #004071; font-family: 'Mulish', Arial, Helvetica, sans-serif; font-size: 16px; font-weight: 700;">
+                                Deine ersten Schritte
+                            </h3>
+
+                            <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                                <tr>
+                                    <td style="padding: 8px 0; vertical-align: top; width: 28px;">
+                                        <span style="display: inline-block; width: 24px; height: 24px; background: #c7eafb; color: #004071; border-radius: 50%; text-align: center; line-height: 24px; font-family: 'Mulish', Arial, sans-serif; font-size: 13px; font-weight: 700;">1</span>
+                                    </td>
+                                    <td style="padding: 8px 0 8px 12px; color: #2d3748; font-family: 'Mulish', Arial, Helvetica, sans-serif; font-size: 14px; line-height: 1.5;">
+                                        Melde dich mit deinen Zugangsdaten im Intranet an
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 8px 0; vertical-align: top; width: 28px;">
+                                        <span style="display: inline-block; width: 24px; height: 24px; background: #c7eafb; color: #004071; border-radius: 50%; text-align: center; line-height: 24px; font-family: 'Mulish', Arial, sans-serif; font-size: 13px; font-weight: 700;">2</span>
+                                    </td>
+                                    <td style="padding: 8px 0 8px 12px; color: #2d3748; font-family: 'Mulish', Arial, Helvetica, sans-serif; font-size: 14px; line-height: 1.5;">
+                                        Aendere dein Passwort unter Profil &rarr; Passwort aendern
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 8px 0; vertical-align: top; width: 28px;">
+                                        <span style="display: inline-block; width: 24px; height: 24px; background: #c7eafb; color: #004071; border-radius: 50%; text-align: center; line-height: 24px; font-family: 'Mulish', Arial, sans-serif; font-size: 13px; font-weight: 700;">3</span>
+                                    </td>
+                                    <td style="padding: 8px 0 8px 12px; color: #2d3748; font-family: 'Mulish', Arial, Helvetica, sans-serif; font-size: 14px; line-height: 1.5;">
+                                        Schau dir die <a href="{{intranet_url}}/einschulung" style="color: #005e9e; text-decoration: none; font-weight: 600;">Einschulungsdokumente</a> an
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 8px 0; vertical-align: top; width: 28px;">
+                                        <span style="display: inline-block; width: 24px; height: 24px; background: #c7eafb; color: #004071; border-radius: 50%; text-align: center; line-height: 24px; font-family: 'Mulish', Arial, sans-serif; font-size: 13px; font-weight: 700;">4</span>
+                                    </td>
+                                    <td style="padding: 8px 0 8px 12px; color: #2d3748; font-family: 'Mulish', Arial, Helvetica, sans-serif; font-size: 14px; line-height: 1.5;">
+                                        Erkunde die Neuigkeiten und lerne deine KollegInnen kennen
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+
+                    <!-- Trennlinie -->
+                    <tr>
+                        <td style="padding: 0 40px;">
+                            <hr style="border: none; border-top: 1px solid #e2e8f0; margin: 0;">
+                        </td>
+                    </tr>
+
+                    <!-- Kontakt bei Problemen -->
+                    <tr>
+                        <td style="padding: 24px 40px;">
+                            <p style="margin: 0; color: #718096; font-family: 'Mulish', Arial, Helvetica, sans-serif; font-size: 13px; line-height: 1.6;">
+                                <strong style="color: #2d3748;">Probleme beim Login?</strong><br>
+                                Wende dich an die IT-Abteilung: <a href="mailto:it@firma.at" style="color: #005e9e; text-decoration: none;">it@firma.at</a>
+                            </p>
+                        </td>
+                    </tr>
+
+                    <!-- Footer -->
+                    <tr>
+                        <td style="background-color: #f5f7fa; padding: 24px 40px; border-top: 1px solid #e2e8f0;">
+                            <p style="margin: 0; color: #a0aec0; font-family: 'Mulish', Arial, Helvetica, sans-serif; font-size: 12px; line-height: 1.5; text-align: center;">
+                                Diese E-Mail wurde automatisch generiert.<br>
+                                &copy; {{firma_name}} &ndash; Intranet-System
+                            </p>
+                        </td>
+                    </tr>
+
+                </table>
+
+            </td>
+        </tr>
+    </table>
+
+</body>
+</html>

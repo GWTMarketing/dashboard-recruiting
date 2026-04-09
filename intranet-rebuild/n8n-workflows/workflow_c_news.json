@@ -1,0 +1,481 @@
+{
+  "name": "News-Pipeline: E-Mail \u2192 Claude \u2192 WordPress",
+  "nodes": [
+    {
+      "parameters": {
+        "mailbox": "INBOX",
+        "postReceiveAction": "read",
+        "options": {
+          "customEmailConfig": "news@intranet.firma.at"
+        }
+      },
+      "id": "a1b2c3d4-0001-4000-8000-000000000001",
+      "name": "IMAP Email Trigger",
+      "type": "n8n-nodes-base.imapEmail",
+      "typeVersion": 2,
+      "position": [0, 300],
+      "credentials": {
+        "imap": {
+          "id": "imap_news_inbox",
+          "name": "News Mailbox IMAP"
+        }
+      },
+      "webhookId": null
+    },
+    {
+      "parameters": {
+        "jsCode": "const items = $input.all();\nconst results = [];\n\nfor (const item of items) {\n  const subject = item.json.subject || '';\n  let bodyText = item.json.text || item.json.html || '';\n\n  // Strip HTML tags if present\n  bodyText = bodyText.replace(/<style[^>]*>[\\s\\S]*?<\\/style>/gi, '');\n  bodyText = bodyText.replace(/<script[^>]*>[\\s\\S]*?<\\/script>/gi, '');\n  bodyText = bodyText.replace(/<[^>]+>/g, '');\n  bodyText = bodyText.replace(/&nbsp;/g, ' ');\n  bodyText = bodyText.replace(/&amp;/g, '&');\n  bodyText = bodyText.replace(/&lt;/g, '<');\n  bodyText = bodyText.replace(/&gt;/g, '>');\n  bodyText = bodyText.replace(/\\s+/g, ' ').trim();\n\n  const fromHeader = item.json.from || '';\n  const emailMatch = fromHeader.match(/<([^>]+)>/) || fromHeader.match(/([\\w.-]+@[\\w.-]+)/);\n  const senderEmail = emailMatch ? emailMatch[1] : fromHeader;\n  const nameMatch = fromHeader.match(/^([^<]+)\\s*</);\n  const senderName = nameMatch ? nameMatch[1].trim().replace(/\"/g, '') : senderEmail;\n\n  results.push({\n    json: {\n      subject: subject,\n      body_text: bodyText,\n      sender_email: senderEmail,\n      sender_name: senderName\n    }\n  });\n}\n\nreturn results;"
+      },
+      "id": "a1b2c3d4-0001-4000-8000-000000000002",
+      "name": "Extract Email Content",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [260, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.anthropic.com/v1/messages",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "anthropic-version",
+              "value": "2023-06-01"
+            },
+            {
+              "name": "content-type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": \"claude-sonnet-4-20250514\",\n  \"max_tokens\": 1024,\n  \"system\": \"Du bist interner Redakteur eines oesterreichischen Unternehmens. Erstelle einen sachlichen Intranet-Newsartikel (150-250 Woerter) aus den folgenden Stichpunkten. Ton: professionell, intern, keine Marketing-Sprache. Formatierung: Titel (max. 60 Zeichen) + 2-3 Absaetze. Antworte ausschliesslich mit validem JSON: {\\\"title\\\": \\\"...\\\", \\\"content\\\": \\\"...\\\"}\",\n  \"messages\": [\n    {\n      \"role\": \"user\",\n      \"content\": \"Betreff: {{ $json.subject }}\\n\\nInhalt:\\n{{ $json.body_text }}\"\n    }\n  ]\n}",
+        "options": {
+          "timeout": 30000
+        }
+      },
+      "id": "a1b2c3d4-0001-4000-8000-000000000003",
+      "name": "Claude API Request",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [520, 300],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "anthropic_api_key",
+          "name": "Anthropic API Key"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const items = $input.all();\nconst emailData = $('Extract Email Content').first().json;\nconst results = [];\n\nfor (const item of items) {\n  let title = '';\n  let content = '';\n\n  try {\n    // Claude API response: content[0].text contains the JSON string\n    const responseText = item.json.content[0].text;\n\n    // Try to parse the JSON from Claude's response\n    // Handle cases where Claude may wrap JSON in markdown code blocks\n    let jsonStr = responseText;\n    const codeBlockMatch = responseText.match(/```(?:json)?\\s*([\\s\\S]*?)```/);\n    if (codeBlockMatch) {\n      jsonStr = codeBlockMatch[1].trim();\n    }\n\n    const parsed = JSON.parse(jsonStr);\n\n    if (parsed.title && parsed.content) {\n      title = parsed.title;\n      content = parsed.content;\n    } else {\n      throw new Error('Missing title or content in parsed JSON');\n    }\n  } catch (error) {\n    // Fallback: use email subject as title\n    title = emailData.subject || 'Neuer Artikel';\n    content = item.json.content && item.json.content[0]\n      ? item.json.content[0].text\n      : emailData.body_text || '';\n  }\n\n  const excerpt = content.substring(0, 160).replace(/<[^>]+>/g, '').trim();\n\n  results.push({\n    json: {\n      title: title,\n      content: content,\n      excerpt: excerpt,\n      sender_email: emailData.sender_email,\n      sender_name: emailData.sender_name,\n      original_subject: emailData.subject\n    }\n  });\n}\n\nreturn results;"
+      },
+      "id": "a1b2c3d4-0001-4000-8000-000000000004",
+      "name": "Parse Claude Response",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [780, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{$env.WP_URL}}/wp-json/wp/v2/posts",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"title\": {{ JSON.stringify($json.title) }},\n  \"content\": {{ JSON.stringify($json.content) }},\n  \"status\": \"draft\",\n  \"excerpt\": {{ JSON.stringify($json.excerpt) }}\n}",
+        "options": {}
+      },
+      "id": "a1b2c3d4-0001-4000-8000-000000000005",
+      "name": "Create WordPress Draft",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1040, 300],
+      "credentials": {
+        "httpBasicAuth": {
+          "id": "wp_api_credentials",
+          "name": "WordPress API Credentials"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "fromEmail": "=noreply@intranet.firma.at",
+        "toEmail": "redaktion@intranet.firma.at",
+        "subject": "=[Intranet] Neuer Artikel zur Freigabe: {{ $('Parse Claude Response').first().json.title }}",
+        "emailType": "html",
+        "html": "=<!DOCTYPE html>\n<html>\n<head><meta charset=\"utf-8\"></head>\n<body style=\"font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;\">\n  <h2 style=\"color: #333; border-bottom: 2px solid #0066cc; padding-bottom: 10px;\">Neuer Artikel zur Freigabe</h2>\n\n  <div style=\"background: #f5f5f5; border-left: 4px solid #0066cc; padding: 15px; margin: 20px 0;\">\n    <h3 style=\"margin-top: 0; color: #0066cc;\">{{ $('Parse Claude Response').first().json.title }}</h3>\n    <div style=\"color: #333; line-height: 1.6;\">{{ $('Parse Claude Response').first().json.content }}</div>\n  </div>\n\n  <p style=\"color: #666; font-size: 0.9em;\">Eingereicht von: {{ $('Parse Claude Response').first().json.sender_name }} ({{ $('Parse Claude Response').first().json.sender_email }})</p>\n  <p style=\"color: #666; font-size: 0.9em;\">WordPress Post-ID: {{ $json.id }}</p>\n\n  <div style=\"margin: 30px 0; text-align: center;\">\n    <a href=\"{{ $env.WEBHOOK_BASE_URL }}/webhook/article-approval?post_id={{ $json.id }}&action=publish&token={{ Buffer.from($json.id + '-publish-' + Date.now()).toString('base64url') }}\"\n       style=\"display: inline-block; background: #28a745; color: white; padding: 12px 30px; text-decoration: none; border-radius: 5px; margin: 5px; font-weight: bold;\">\n      Freigeben\n    </a>\n    <a href=\"{{ $env.WEBHOOK_BASE_URL }}/webhook/article-approval?post_id={{ $json.id }}&action=reject&token={{ Buffer.from($json.id + '-reject-' + Date.now()).toString('base64url') }}\"\n       style=\"display: inline-block; background: #dc3545; color: white; padding: 12px 30px; text-decoration: none; border-radius: 5px; margin: 5px; font-weight: bold;\">\n      Ablehnen\n    </a>\n  </div>\n\n  <hr style=\"border: none; border-top: 1px solid #ddd; margin: 20px 0;\">\n  <p style=\"color: #999; font-size: 0.8em;\">Diese E-Mail wurde automatisch von der News-Pipeline generiert.</p>\n</body>\n</html>",
+        "options": {}
+      },
+      "id": "a1b2c3d4-0001-4000-8000-000000000006",
+      "name": "Send Approval Email",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [1300, 300],
+      "credentials": {
+        "smtp": {
+          "id": "smtp_intranet",
+          "name": "Intranet SMTP"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "httpMethod": "GET",
+        "path": "article-approval",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "a1b2c3d4-0001-4000-8000-000000000007",
+      "name": "Webhook Approval",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [0, 700],
+      "webhookId": "article-approval"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "condition-publish",
+              "leftValue": "={{ $json.query.action }}",
+              "rightValue": "publish",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "a1b2c3d4-0001-4000-8000-000000000008",
+      "name": "Check Action",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [260, 700]
+    },
+    {
+      "parameters": {
+        "method": "PATCH",
+        "url": "={{ $env.WP_URL }}/wp-json/wp/v2/posts/{{ $json.query.post_id }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n  \"status\": \"publish\"\n}",
+        "options": {}
+      },
+      "id": "a1b2c3d4-0001-4000-8000-000000000009",
+      "name": "Publish Post",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [520, 600],
+      "credentials": {
+        "httpBasicAuth": {
+          "id": "wp_api_credentials",
+          "name": "WordPress API Credentials"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "fromEmail": "=noreply@intranet.firma.at",
+        "toEmail": "={{ $('Webhook Approval').first().json.query.sender_email || $env.ADMIN_EMAIL }}",
+        "subject": "=[Intranet] Artikel veroeffentlicht: {{ $json.title.rendered }}",
+        "emailType": "html",
+        "html": "=<!DOCTYPE html>\n<html>\n<head><meta charset=\"utf-8\"></head>\n<body style=\"font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;\">\n  <h2 style=\"color: #28a745;\">Artikel veroeffentlicht</h2>\n  <p>Der folgende Artikel wurde freigegeben und ist jetzt im Intranet sichtbar:</p>\n  <div style=\"background: #f5f5f5; border-left: 4px solid #28a745; padding: 15px; margin: 20px 0;\">\n    <h3 style=\"margin-top: 0;\">{{ $json.title.rendered }}</h3>\n    <p><a href=\"{{ $json.link }}\">Artikel im Intranet ansehen</a></p>\n  </div>\n  <p style=\"color: #999; font-size: 0.8em;\">Diese E-Mail wurde automatisch von der News-Pipeline generiert.</p>\n</body>\n</html>",
+        "options": {}
+      },
+      "id": "a1b2c3d4-0001-4000-8000-000000000010",
+      "name": "Send Publish Confirmation",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [780, 600],
+      "credentials": {
+        "smtp": {
+          "id": "smtp_intranet",
+          "name": "Intranet SMTP"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "=<!DOCTYPE html><html><head><meta charset=\"utf-8\"><title>Artikel freigegeben</title></head><body style=\"font-family: Arial, sans-serif; text-align: center; padding: 50px;\"><h1 style=\"color: #28a745;\">&#10003; Artikel wurde freigegeben</h1><p>Der Artikel wurde erfolgreich veroeffentlicht.</p><p><a href=\"{{ $env.WP_URL }}/wp-admin/\">Zum WordPress-Dashboard</a></p></body></html>",
+        "options": {
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "content-type",
+                "value": "text/html; charset=utf-8"
+              }
+            ]
+          }
+        }
+      },
+      "id": "a1b2c3d4-0001-4000-8000-000000000011",
+      "name": "Respond Publish OK",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [1040, 600]
+    },
+    {
+      "parameters": {
+        "method": "PATCH",
+        "url": "={{ $env.WP_URL }}/wp-json/wp/v2/posts/{{ $('Webhook Approval').first().json.query.post_id }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n  \"status\": \"trash\"\n}",
+        "options": {}
+      },
+      "id": "a1b2c3d4-0001-4000-8000-000000000012",
+      "name": "Trash Post",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [520, 840],
+      "credentials": {
+        "httpBasicAuth": {
+          "id": "wp_api_credentials",
+          "name": "WordPress API Credentials"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "fromEmail": "=noreply@intranet.firma.at",
+        "toEmail": "={{ $('Webhook Approval').first().json.query.sender_email || $env.ADMIN_EMAIL }}",
+        "subject": "=[Intranet] Artikel abgelehnt",
+        "emailType": "html",
+        "html": "=<!DOCTYPE html>\n<html>\n<head><meta charset=\"utf-8\"></head>\n<body style=\"font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;\">\n  <h2 style=\"color: #dc3545;\">Artikel abgelehnt</h2>\n  <p>Der eingereichte Artikel wurde von der Redaktion abgelehnt.</p>\n  <p>Bei Fragen wenden Sie sich bitte an <a href=\"mailto:redaktion@intranet.firma.at\">redaktion@intranet.firma.at</a>.</p>\n  <p style=\"color: #999; font-size: 0.8em;\">Diese E-Mail wurde automatisch von der News-Pipeline generiert.</p>\n</body>\n</html>",
+        "options": {}
+      },
+      "id": "a1b2c3d4-0001-4000-8000-000000000013",
+      "name": "Send Rejection Notice",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [780, 840],
+      "credentials": {
+        "smtp": {
+          "id": "smtp_intranet",
+          "name": "Intranet SMTP"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "=<!DOCTYPE html><html><head><meta charset=\"utf-8\"><title>Artikel abgelehnt</title></head><body style=\"font-family: Arial, sans-serif; text-align: center; padding: 50px;\"><h1 style=\"color: #dc3545;\">&#10007; Artikel wurde abgelehnt</h1><p>Der Artikel wurde abgelehnt und in den Papierkorb verschoben.</p><p><a href=\"{{ $env.WP_URL }}/wp-admin/\">Zum WordPress-Dashboard</a></p></body></html>",
+        "options": {
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "content-type",
+                "value": "text/html; charset=utf-8"
+              }
+            ]
+          }
+        }
+      },
+      "id": "a1b2c3d4-0001-4000-8000-000000000014",
+      "name": "Respond Reject OK",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [1040, 840]
+    },
+    {
+      "parameters": {
+        "fromEmail": "=noreply@intranet.firma.at",
+        "toEmail": "={{ $env.ADMIN_EMAIL }}",
+        "subject": "=[Intranet] FEHLER in News-Pipeline",
+        "emailType": "html",
+        "html": "=<!DOCTYPE html>\n<html>\n<head><meta charset=\"utf-8\"></head>\n<body style=\"font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;\">\n  <h2 style=\"color: #dc3545;\">Fehler in der News-Pipeline</h2>\n  <p>Ein Fehler ist in der automatisierten News-Pipeline aufgetreten:</p>\n  <div style=\"background: #fff3f3; border-left: 4px solid #dc3545; padding: 15px; margin: 20px 0;\">\n    <p><strong>Workflow:</strong> News-Pipeline: E-Mail &rarr; Claude &rarr; WordPress</p>\n    <p><strong>Fehlermeldung:</strong> {{ $json.error.message || 'Unbekannter Fehler' }}</p>\n    <p><strong>Node:</strong> {{ $json.error.node || 'Unbekannt' }}</p>\n    <p><strong>Zeitpunkt:</strong> {{ new Date().toLocaleString('de-AT') }}</p>\n  </div>\n  <p>Bitte pruefen Sie den Workflow im <a href=\"{{ $env.WEBHOOK_BASE_URL }}\">n8n Dashboard</a>.</p>\n  <p style=\"color: #999; font-size: 0.8em;\">Diese E-Mail wurde automatisch generiert.</p>\n</body>\n</html>",
+        "options": {}
+      },
+      "id": "a1b2c3d4-0001-4000-8000-000000000015",
+      "name": "Error Alert Email",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [780, 1100],
+      "credentials": {
+        "smtp": {
+          "id": "smtp_intranet",
+          "name": "Intranet SMTP"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "IMAP Email Trigger": {
+      "main": [
+        [
+          {
+            "node": "Extract Email Content",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Email Content": {
+      "main": [
+        [
+          {
+            "node": "Claude API Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Claude API Request": {
+      "main": [
+        [
+          {
+            "node": "Parse Claude Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse Claude Response": {
+      "main": [
+        [
+          {
+            "node": "Create WordPress Draft",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create WordPress Draft": {
+      "main": [
+        [
+          {
+            "node": "Send Approval Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook Approval": {
+      "main": [
+        [
+          {
+            "node": "Check Action",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Action": {
+      "main": [
+        [
+          {
+            "node": "Publish Post",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Trash Post",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Publish Post": {
+      "main": [
+        [
+          {
+            "node": "Send Publish Confirmation",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Publish Confirmation": {
+      "main": [
+        [
+          {
+            "node": "Respond Publish OK",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Trash Post": {
+      "main": [
+        [
+          {
+            "node": "Send Rejection Notice",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Rejection Notice": {
+      "main": [
+        [
+          {
+            "node": "Respond Reject OK",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner",
+    "errorWorkflow": ""
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "name": "News",
+      "id": "tag-news"
+    },
+    {
+      "name": "Claude API",
+      "id": "tag-claude-api"
+    },
+    {
+      "name": "Automatisierung",
+      "id": "tag-automatisierung"
+    }
+  ],
+  "triggerCount": 2,
+  "updatedAt": "2026-04-08T00:00:00.000Z",
+  "versionId": "1",
+  "meta": {
+    "templateCredsSetupCompleted": false,
+    "instanceId": ""
+  },
+  "pinData": {}
+}
