@@ -1,133 +1,158 @@
 {
   "content": [
     {
-      "id": "st2001",
+      "id": "st3001",
       "name": "section",
       "parent": 0,
-      "children": ["st2002"],
+      "children": ["st3002"],
       "settings": {
-        "_padding": { "top": "60", "bottom": "60", "left": "40", "right": "40" },
+        "_padding": { "top": "80", "bottom": "80", "left": "48", "right": "48" },
         "_background": { "color": { "hex": "#f5f7fa" } }
       },
       "label": "GWT Startseite"
     },
     {
-      "id": "st2002",
+      "id": "st3002",
       "name": "container",
-      "parent": "st2001",
-      "children": ["st2003", "st2010", "st2030", "st2040"],
+      "parent": "st3001",
+      "children": ["st3003", "st3004", "st3010", "st3030", "st3040"],
       "settings": {
         "_direction": "column",
-        "_gap": "32px",
-        "_width": "1200px",
+        "_gap": "40px",
+        "_width": "1240px",
         "_margin": { "left": "auto", "right": "auto" }
       }
     },
     {
-      "id": "st2003",
+      "id": "st3003",
       "name": "heading",
-      "parent": "st2002",
+      "parent": "st3002",
       "children": [],
       "settings": {
         "text": "Willkommen, {wp_user_first_name}!",
         "tag": "h1",
         "_typography": {
           "font-family": "Mulish",
-          "font-size": "42px",
-          "font-weight": "700",
+          "font-size": "44px",
+          "font-weight": "800",
+          "line-height": "1.1",
+          "letter-spacing": "-0.02em",
           "color": { "hex": "#004071" }
-        }
-      }
+        },
+        "_margin": { "bottom": "0" }
+      },
+      "label": "Begruessung H1"
     },
     {
-      "id": "st2010",
+      "id": "st3004",
+      "name": "text-basic",
+      "parent": "st3002",
+      "children": [],
+      "settings": {
+        "text": "Dein internes Dashboard – immer auf dem Laufenden.",
+        "_typography": {
+          "font-family": "Mulish",
+          "font-size": "17px",
+          "font-weight": "400",
+          "color": { "hex": "#6b7280" }
+        },
+        "_margin": { "top": "-32" }
+      },
+      "label": "Subtitle"
+    },
+    {
+      "id": "st3010",
       "name": "block",
-      "parent": "st2002",
-      "children": ["st2011", "st2015"],
+      "parent": "st3002",
+      "children": ["st3011", "st3015"],
       "settings": {
         "_display": "grid",
         "_gridTemplateColumns": "1fr 2fr",
-        "_gap": "24px"
+        "_gap": "32px"
       },
-      "label": "Wetter + News"
+      "label": "Row 1: Wetter + News"
     },
     {
-      "id": "st2011",
+      "id": "st3011",
       "name": "block",
-      "parent": "st2010",
-      "children": ["st2012", "st2013"],
+      "parent": "st3010",
+      "children": ["st3012", "st3013"],
       "settings": {
-        "_padding": { "top": "24", "bottom": "24", "left": "24", "right": "24" },
+        "_padding": { "top": "32", "bottom": "32", "left": "32", "right": "32" },
         "_background": { "color": { "hex": "#ffffff" } },
-        "_border": { "radius": { "top": "12", "right": "12", "bottom": "12", "left": "12" } },
+        "_border": { "radius": { "top": "16", "right": "16", "bottom": "16", "left": "16" } },
         "_boxShadow": {
-          "values": { "offsetX": "0", "offsetY": "2", "blur": "8", "spread": "0" },
-          "color": { "hex": "#0000000f" }
+          "values": { "offsetX": "0", "offsetY": "1", "blur": "3", "spread": "0" },
+          "color": { "hex": "#0000000a" }
         }
       },
       "label": "Wetter-Card"
     },
     {
-      "id": "st2012",
+      "id": "st3012",
       "name": "heading",
-      "parent": "st2011",
+      "parent": "st3011",
       "children": [],
       "settings": {
         "text": "Wetter",
         "tag": "h3",
         "_typography": {
           "font-family": "Mulish",
-          "font-size": "18px",
+          "font-size": "13px",
           "font-weight": "700",
-          "color": { "hex": "#004071" }
+          "letter-spacing": "0.08em",
+          "text-transform": "uppercase",
+          "color": { "hex": "#6b7280" }
         },
-        "_margin": { "bottom": "16" }
+        "_margin": { "bottom": "20" }
       }
     },
     {
-      "id": "st2013",
+      "id": "st3013",
       "name": "shortcode",
-      "parent": "st2011",
+      "parent": "st3011",
       "children": [],
       "settings": { "shortcode": "[wetter_widget]" }
     },
     {
-      "id": "st2015",
+      "id": "st3015",
       "name": "block",
-      "parent": "st2010",
-      "children": ["st2016", "st2017"],
+      "parent": "st3010",
+      "children": ["st3016", "st3017"],
       "settings": {
-        "_padding": { "top": "24", "bottom": "24", "left": "24", "right": "24" },
+        "_padding": { "top": "32", "bottom": "32", "left": "32", "right": "32" },
         "_background": { "color": { "hex": "#ffffff" } },
-        "_border": { "radius": { "top": "12", "right": "12", "bottom": "12", "left": "12" } },
+        "_border": { "radius": { "top": "16", "right": "16", "bottom": "16", "left": "16" } },
         "_boxShadow": {
-          "values": { "offsetX": "0", "offsetY": "2", "blur": "8", "spread": "0" },
-          "color": { "hex": "#0000000f" }
+          "values": { "offsetX": "0", "offsetY": "1", "blur": "3", "spread": "0" },
+          "color": { "hex": "#0000000a" }
         }
       },
       "label": "News-Card"
     },
     {
-      "id": "st2016",
+      "id": "st3016",
       "name": "heading",
-      "parent": "st2015",
+      "parent": "st3015",
       "children": [],
       "settings": {
         "text": "Aktuelle News",
         "tag": "h3",
         "_typography": {
           "font-family": "Mulish",
-          "font-size": "18px",
+          "font-size": "13px",
           "font-weight": "700",
-          "color": { "hex": "#004071" }
+          "letter-spacing": "0.08em",
+          "text-transform": "uppercase",
+          "color": { "hex": "#6b7280" }
         },
-        "_margin": { "bottom": "16" }
+        "_margin": { "bottom": "20" }
       }
     },
     {
-      "id": "st2017",
+      "id": "st3017",
       "name": "posts",
-      "parent": "st2015",
+      "parent": "st3015",
       "children": [],
       "settings": {
         "query": {
@@ -138,86 +163,91 @@
         },
         "fields": ["title", "excerpt"],
         "title": { "tag": "h4" },
-        "excerptLength": "18"
+        "excerptLength": "20",
+        "_gap": "20px"
       }
     },
     {
-      "id": "st2030",
+      "id": "st3030",
       "name": "block",
-      "parent": "st2002",
-      "children": ["st2031", "st2032"],
+      "parent": "st3002",
+      "children": ["st3031", "st3032"],
       "settings": {
-        "_padding": { "top": "24", "bottom": "24", "left": "24", "right": "24" },
+        "_padding": { "top": "32", "bottom": "32", "left": "32", "right": "32" },
         "_background": { "color": { "hex": "#ffffff" } },
-        "_border": { "radius": { "top": "12", "right": "12", "bottom": "12", "left": "12" } },
+        "_border": { "radius": { "top": "16", "right": "16", "bottom": "16", "left": "16" } },
         "_boxShadow": {
-          "values": { "offsetX": "0", "offsetY": "2", "blur": "8", "spread": "0" },
-          "color": { "hex": "#0000000f" }
+          "values": { "offsetX": "0", "offsetY": "1", "blur": "3", "spread": "0" },
+          "color": { "hex": "#0000000a" }
         }
       },
       "label": "Welcome on Board"
     },
     {
-      "id": "st2031",
+      "id": "st3031",
       "name": "heading",
-      "parent": "st2030",
+      "parent": "st3030",
       "children": [],
       "settings": {
-        "text": "🎉 Welcome on Board!",
+        "text": "Welcome on Board",
         "tag": "h2",
         "_typography": {
           "font-family": "Mulish",
-          "font-size": "22px",
+          "font-size": "13px",
           "font-weight": "700",
-          "color": { "hex": "#004071" }
+          "letter-spacing": "0.08em",
+          "text-transform": "uppercase",
+          "color": { "hex": "#6b7280" }
         },
-        "_margin": { "bottom": "16" }
+        "_margin": { "bottom": "24" }
       }
     },
     {
-      "id": "st2032",
+      "id": "st3032",
       "name": "shortcode",
-      "parent": "st2030",
+      "parent": "st3030",
       "children": [],
       "settings": { "shortcode": "[welcome_bereich anzahl=\"6\" monate=\"2\"]" }
     },
     {
-      "id": "st2040",
+      "id": "st3040",
       "name": "block",
-      "parent": "st2002",
-      "children": ["st2041", "st2042"],
+      "parent": "st3002",
+      "children": ["st3041", "st3042"],
       "settings": {
-        "_padding": { "top": "24", "bottom": "24", "left": "24", "right": "24" },
+        "_padding": { "top": "32", "bottom": "32", "left": "32", "right": "32" },
         "_background": { "color": { "hex": "#ffffff" } },
-        "_border": { "radius": { "top": "12", "right": "12", "bottom": "12", "left": "12" } },
+        "_border": { "radius": { "top": "16", "right": "16", "bottom": "16", "left": "16" } },
         "_boxShadow": {
-          "values": { "offsetX": "0", "offsetY": "2", "blur": "8", "spread": "0" },
-          "color": { "hex": "#0000000f" }
+          "values": { "offsetX": "0", "offsetY": "1", "blur": "3", "spread": "0" },
+          "color": { "hex": "#0000000a" }
         }
       },
       "label": "Schwarzes Brett"
     },
     {
-      "id": "st2041",
+      "id": "st3041",
       "name": "heading",
-      "parent": "st2040",
+      "parent": "st3040",
       "children": [],
       "settings": {
         "text": "Schwarzes Brett",
         "tag": "h2",
         "_typography": {
           "font-family": "Mulish",
-          "font-size": "22px",
+          "font-size": "13px",
           "font-weight": "700",
-          "color": { "hex": "#004071" }
+          "letter-spacing": "0.08em",
+          "text-transform": "uppercase",
+          "color": { "hex": "#6b7280" }
         },
-        "_margin": { "bottom": "16" }
+        "_margin": { "bottom": "24" }
       }
     },
     {
-      "id": "st2042",
+      "id": "st3042",
       "name": "posts",
-      "parent": "st2040",
+      "parent": "st3040",
       "children": [],
       "settings": {
         "query": {
@@ -228,7 +258,8 @@
         },
         "fields": ["title", "excerpt"],
         "columns": "3",
-        "excerptLength": "14"
+        "excerptLength": "16",
+        "_gap": "24px"
       }
     }
   ],
