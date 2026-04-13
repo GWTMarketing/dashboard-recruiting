@@ -1,107 +1,93 @@
-# GWT Bricks Templates – Import-Anleitung
+# GWT Bricks Templates – richtiger Workflow
 
-Fertige Bricks-Builder-Templates im GWT Design (Mulish, #004071 / #005e9e / #c7eafb).
+## Was war beim ersten Versuch falsch?
 
-## Was du hier findest
+Die alten JSONs waren in einem **Array** verpackt mit `templateType` etc. – das ist NICHT das Format, das Bricks erwartet. Bricks verwendet das **Copy/Paste-Format**:
 
-| Datei | Was es ist | Template-Typ |
-|-------|------------|--------------|
-| `01-header.json` | Dunkle Sidebar links mit Menü + Profil-Block unten | Header |
-| `02-footer.json` | Schmale Fußzeile in GWT-Blau | Footer |
-| `03-mitarbeiter-single.json` | Mitarbeiter-Detailseite (Foto, Name, Position, Kontakt, Vor/Zurück) | Single |
-| `04-schwarzes-brett-archive.json` | Aushang-Übersicht als Card-Grid | Archive |
-| `05-startseite.json` | Komplette Startseite: Wetter + News + Welcome + Schwarzes Brett | Section |
-
-## Voraussetzungen
-
-- Bricks Theme + Child-Theme sind installiert und aktiv
-- Das GWT Child-Theme (aus `interne-plattform-neu.zip`) ist aktiv
-- Die Custom Post Types `employee` und `bulletin_board` sind sichtbar (WP Admin → Mitarbeiter / Schwarzes Brett)
-- Shortcodes `[wetter_widget]`, `[welcome_bereich]`, `[mitarbeiter_navigation]` funktionieren (werden vom Child-Theme registriert)
-
-## Import-Schritte (für jede der 5 Dateien)
-
-1. Datei auf deinen Computer herunterladen (Rechtsklick → "Speichern unter")
-2. WordPress Admin öffnen
-3. **Bricks → Templates**
-4. Oben auf **"Import"** klicken
-5. JSON-Datei auswählen → **"Import"**
-6. Template erscheint in der Liste – Titel prüfen
-
-## Nach dem Import: Conditions setzen
-
-Bricks Import übernimmt die Template-Bedingungen meist nicht automatisch. Setze sie manuell:
-
-### Header (`01-header.json`)
-- Template öffnen → **"Edit with Bricks"**
-- Zahnrad ⚙️ (Toolbar) → **Settings** → Tab **"Template"** → **Conditions**
-- **"+ Add Condition"** → **Entire website**
-- Save
-
-### Footer (`02-footer.json`)
-- Gleich wie Header, aber im Footer-Template
-- Condition: **Entire website**
-
-### Mitarbeiter-Einzelseite (`03-mitarbeiter-single.json`)
-- Template öffnen → Settings → Template → Conditions
-- **"+ Add Condition"** → **Single** → **Post Type: Mitarbeiter**
-- Save
-
-### Schwarzes Brett Archiv (`04-schwarzes-brett-archive.json`)
-- Template öffnen → Settings → Template → Conditions
-- **"+ Add Condition"** → **Archive** → **Post Type Archive: Aushang**
-- Save
-
-### Startseite (`05-startseite.json`)
-Diese ist als **Section-Template** gebaut, weil du sie flexibel auf die bestehende Startseite setzen willst.
-
-**Variante A (empfohlen):**
-- WP Admin → **Seiten** → "Startseite" (oder eine neue erstellen)
-- **Einstellungen → Lesen** → "Eine statische Seite" → Startseite auswählen
-- Die Seite öffnen → **"Edit with Bricks"**
-- Links im Panel **"+"** → Suche "Template" → Element **"Template"** einfügen
-- Rechts: dropdown **"GWT Startseite"** wählen
-
-**Variante B:**
-- Template-Typ nach Import auf "Single" umstellen und Condition **Front Page** setzen
-
-## Shortcode-Alternative (falls Import hakt)
-
-Jede Seite funktioniert auch ohne Bricks-Templates, wenn du in normale WP-Seiten diese Shortcodes einfügst:
-
-```
-[welcome_bereich anzahl="6" monate="2"]
-[wetter_widget]
-[mitarbeiter_navigation]
+```json
+{
+  "content": [...],
+  "source": "bricksCopiedElements",
+  "sourceUrl": "",
+  "version": "1.12.2",
+  "globalClasses": [],
+  "globalElements": []
+}
 ```
 
-## Falls der Import fehlschlägt
+Genau das machen jetzt die neuen Files.
 
-Bricks-Versionen < 1.9 haben ein leicht anderes JSON-Format. Falls der Import mit Fehler abbricht:
+## Dateien
 
-1. Update Bricks auf ≥ 1.10 (WP Admin → Design → Bricks Lizenz)
-2. Alternativ: Template manuell nachbauen und den **Inhalt** der Datei per Copy-Paste über **Strukturansicht → Paste** einfügen
-3. Oder: die Shortcodes nutzen (siehe oben) – das funktioniert ohne Templates
+| Datei | Was es ist |
+|-------|------------|
+| `00-test-import.json` | **Mini-Test** – ein Heading "GWT Bricks-Import funktioniert!" Wenn das funktioniert, klappt das Format. |
+| `01-mitarbeiter-profil.json` | Komplette Mitarbeiter-Profil-Card (Foto, Name, Position, Kontakt) |
+| `02-startseite.json` | Komplette Startseite (Begrüßung, Wetter, News, Welcome, Schwarzes Brett) |
 
-## Nach dem Import testen
+## Workflow – so geht's richtig
 
-1. Frontend öffnen als eingeloggter User → Sidebar sollte links sein
-2. Mitarbeiter-Einzelseite aufrufen (`/mitarbeiter/max-mustermann/`) → Karte mit Foto
-3. Startseite → Welcome-Bereich, News, Schwarzes Brett sichtbar
-4. `/aushang/` aufrufen → Card-Grid mit Aushängen
+Bricks bietet **zwei** Wege, mit JSON-Files zu arbeiten. Wir nutzen den, der zuverlässig funktioniert:
 
-## Farben/Design anpassen
+### Weg A – Paste in den Builder (empfohlen, IMMER funktionierend)
 
-Alle Farben sind im Child-Theme als CSS-Variablen definiert (`style.css`):
+1. **Beliebige Seite oder ein leeres Bricks-Template öffnen** → "Edit with Bricks"
+2. JSON-Datei mit Texteditor öffnen → **kompletten Inhalt kopieren** (Strg+A, Strg+C)
+3. Im Bricks-Builder: links das **Strukturpanel** öffnen (Icon mit den drei Linien)
+4. Im Strukturpanel rechts klicken (auf den weißen Bereich) → **"Insert from clipboard"** oder **"Paste"** wählen
+5. Bricks fügt alle Elemente ein
 
-```css
---gwt-primary: #004071;
---gwt-secondary: #005e9e;
---gwt-accent: #c7eafb;
-```
+**Vorteil:** Das ist die Bricks-Funktion `bricksCopiedElements` direkt – funktioniert **garantiert** in jeder Bricks-Version ab 1.5.
 
-Willst du Farben ändern → diese 3 Werte in der `style.css` anpassen, fertig.
+### Weg B – Templates → Import (wenn Weg A bestätigt funktioniert)
 
----
+1. WP Admin → **Bricks → Templates** → **"Add New"**
+2. Titel: z.B. "Mitarbeiter Single", Type: **Single**
+3. Klick auf das Template → **"Import"** in der Toolbar oben rechts (manche Versionen)
+4. JSON-Datei auswählen → Import
 
-Bei Problemen: Screenshot an Claude schicken, dann bauen wir das Template passend um.
+Falls "Import" Fehler wirft → einfach Weg A nehmen.
+
+## Erst testen, dann skalieren
+
+**Schritt 1:** Mach es mit `00-test-import.json` – wenn du danach im Editor "GWT Bricks-Import funktioniert!" siehst, ist alles gut.
+
+**Schritt 2:** Dann mit den echten Templates.
+
+## Templates nutzen
+
+### Mitarbeiter-Profil
+1. Bricks → Templates → "Add New" → Type: **Single** → "Edit with Bricks"
+2. Im Builder: Strukturpanel → **Paste** mit `01-mitarbeiter-profil.json`
+3. Save
+4. Zahnrad ⚙️ → Settings → Tab **Template** → Conditions → "+ Add" → **Single → Post Type: Mitarbeiter**
+
+### Startseite
+1. Bricks → Templates → "Add New" → Type: **Single** → "Edit with Bricks"
+2. Strukturpanel → Paste mit `02-startseite.json`
+3. Save
+4. Conditions → **Single → Front Page**
+
+## Wichtige Felder, die du nach dem Paste anpassen kannst
+
+Im Mitarbeiter-Profil sind diese **Dynamic Tags** vorgesehen:
+
+| Element | Tag | Was es zieht |
+|---------|-----|--------------|
+| Name | `{post_title}` (post-title element) | Mitarbeiter-Titel |
+| Position | `{cf__employee_position}` | Custom Field |
+| Telefon | `{cf__employee_telefon}` | Custom Field |
+| Mobil | `{cf__employee_mobil}` | Custom Field |
+| Email | `{cf__employee_email}` | Custom Field |
+| Foto | Featured Image | WP Beitragsbild |
+
+**Falls die Custom Fields anders heißen** als oben (`_employee_position` etc.) – einfach den Text-Element öffnen und das Tag im Feld "Text" anpassen.
+
+## Wenn der Test (`00-test-import.json`) NICHT funktioniert
+
+Bitte schick mir:
+1. Deine **Bricks-Version** (steht in WP Admin → Design → Bricks → unten)
+2. Den genauen **Fehlertext**
+3. Screenshot von dem Strukturpanel nach dem Paste-Versuch
+
+Dann kann ich das Format gezielt für deine Bricks-Version anpassen.

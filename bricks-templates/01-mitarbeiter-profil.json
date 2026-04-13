@@ -1,0 +1,176 @@
+{
+  "content": [
+    {
+      "id": "mp1001",
+      "name": "section",
+      "parent": 0,
+      "children": ["mp1002"],
+      "settings": {
+        "_padding": { "top": "60", "bottom": "60", "left": "40", "right": "40" },
+        "_background": { "color": { "hex": "#f5f7fa" } }
+      },
+      "label": "GWT Mitarbeiter-Profil"
+    },
+    {
+      "id": "mp1002",
+      "name": "container",
+      "parent": "mp1001",
+      "children": ["mp1003", "mp1020"],
+      "settings": {
+        "_direction": "column",
+        "_gap": "32px",
+        "_width": "900px",
+        "_margin": { "left": "auto", "right": "auto" }
+      }
+    },
+    {
+      "id": "mp1003",
+      "name": "block",
+      "parent": "mp1002",
+      "children": ["mp1004"],
+      "settings": {
+        "_padding": { "top": "40", "bottom": "40", "left": "40", "right": "40" },
+        "_background": { "color": { "hex": "#ffffff" } },
+        "_border": { "radius": { "top": "12", "right": "12", "bottom": "12", "left": "12" } },
+        "_boxShadow": {
+          "values": { "offsetX": "0", "offsetY": "2", "blur": "8", "spread": "0" },
+          "color": { "hex": "#0000000f" }
+        }
+      },
+      "label": "Profil-Card"
+    },
+    {
+      "id": "mp1004",
+      "name": "block",
+      "parent": "mp1003",
+      "children": ["mp1005", "mp1010"],
+      "settings": {
+        "_display": "flex",
+        "_direction": "row",
+        "_gap": "40px",
+        "_alignItems": "center",
+        "_flexWrap": "wrap"
+      }
+    },
+    {
+      "id": "mp1005",
+      "name": "image",
+      "parent": "mp1004",
+      "children": [],
+      "settings": {
+        "image": {
+          "useDynamicData": { "name": "featured_image" },
+          "size": "medium"
+        },
+        "_width": "200px",
+        "_height": "200px",
+        "_objectFit": "cover",
+        "_border": { "radius": { "top": "999", "right": "999", "bottom": "999", "left": "999" } }
+      },
+      "label": "Mitarbeiter-Foto"
+    },
+    {
+      "id": "mp1010",
+      "name": "block",
+      "parent": "mp1004",
+      "children": ["mp1011", "mp1012", "mp1013", "mp1014", "mp1015"],
+      "settings": {
+        "_display": "flex",
+        "_direction": "column",
+        "_gap": "10px",
+        "_flexGrow": "1"
+      }
+    },
+    {
+      "id": "mp1011",
+      "name": "post-title",
+      "parent": "mp1010",
+      "children": [],
+      "settings": {
+        "tag": "h1",
+        "_typography": {
+          "font-family": "Mulish",
+          "font-size": "36px",
+          "font-weight": "700",
+          "line-height": "1.15",
+          "color": { "hex": "#004071" }
+        }
+      },
+      "label": "Name (post_title)"
+    },
+    {
+      "id": "mp1012",
+      "name": "text-basic",
+      "parent": "mp1010",
+      "children": [],
+      "settings": {
+        "text": "{cf__employee_position}",
+        "_typography": {
+          "font-family": "Mulish",
+          "font-size": "18px",
+          "font-weight": "600",
+          "color": { "hex": "#005e9e" }
+        },
+        "_margin": { "bottom": "12" }
+      },
+      "label": "Position"
+    },
+    {
+      "id": "mp1013",
+      "name": "text-basic",
+      "parent": "mp1010",
+      "children": [],
+      "settings": {
+        "text": "📞 {cf__employee_telefon}",
+        "_typography": {
+          "font-family": "Mulish",
+          "font-size": "15px",
+          "color": { "hex": "#333333" }
+        }
+      }
+    },
+    {
+      "id": "mp1014",
+      "name": "text-basic",
+      "parent": "mp1010",
+      "children": [],
+      "settings": {
+        "text": "📱 {cf__employee_mobil}",
+        "_typography": {
+          "font-family": "Mulish",
+          "font-size": "15px",
+          "color": { "hex": "#333333" }
+        }
+      }
+    },
+    {
+      "id": "mp1015",
+      "name": "text-basic",
+      "parent": "mp1010",
+      "children": [],
+      "settings": {
+        "text": "✉️ {cf__employee_email}",
+        "_typography": {
+          "font-family": "Mulish",
+          "font-size": "15px",
+          "color": { "hex": "#333333" }
+        }
+      }
+    },
+    {
+      "id": "mp1020",
+      "name": "shortcode",
+      "parent": "mp1002",
+      "children": [],
+      "settings": {
+        "shortcode": "[mitarbeiter_navigation]"
+      },
+      "label": "Vor/Zurueck Navigation"
+    }
+  ],
+  "source": "bricksCopiedElements",
+  "sourceUrl": "",
+  "version": "1.12.2",
+  "globalClasses": [],
+  "globalElements": []
+}

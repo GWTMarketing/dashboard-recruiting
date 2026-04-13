@@ -1,0 +1,61 @@
+{
+  "content": [
+    {
+      "id": "tst001",
+      "name": "section",
+      "parent": 0,
+      "children": ["tst002"],
+      "settings": {
+        "_padding": { "top": "80", "bottom": "80", "left": "40", "right": "40" },
+        "_background": { "color": { "hex": "#f5f7fa" } }
+      },
+      "label": "GWT Test Section"
+    },
+    {
+      "id": "tst002",
+      "name": "container",
+      "parent": "tst001",
+      "children": ["tst003", "tst004"],
+      "settings": {
+        "_direction": "column",
+        "_alignItems": "center",
+        "_gap": "16px"
+      }
+    },
+    {
+      "id": "tst003",
+      "name": "heading",
+      "parent": "tst002",
+      "children": [],
+      "settings": {
+        "text": "GWT Bricks-Import funktioniert!",
+        "tag": "h1",
+        "_typography": {
+          "font-family": "Mulish",
+          "font-size": "42px",
+          "font-weight": "700",
+          "color": { "hex": "#004071" }
+        }
+      }
+    },
+    {
+      "id": "tst004",
+      "name": "text-basic",
+      "parent": "tst002",
+      "children": [],
+      "settings": {
+        "text": "Wenn du das siehst, ist das Format korrekt – wir koennen jetzt die echten Templates bauen.",
+        "_typography": {
+          "font-family": "Mulish",
+          "font-size": "18px",
+          "color": { "hex": "#005e9e" }
+        }
+      }
+    }
+  ],
+  "source": "bricksCopiedElements",
+  "sourceUrl": "",
+  "version": "1.12.2",
+  "globalClasses": [],
+  "globalElements": []
+}
