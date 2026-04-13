@@ -1,0 +1,178 @@
+[
+  {
+    "title": "GWT Mitarbeiter Einzelseite",
+    "content": [
+      {
+        "id": "emp001",
+        "name": "section",
+        "parent": "0",
+        "children": ["emp002"],
+        "settings": {
+          "_background": {"color": {"hex": "#f5f7fa"}},
+          "_padding": {"top": "48", "right": "48", "bottom": "48", "left": "328"},
+          "_min-height": "100vh"
+        }
+      },
+      {
+        "id": "emp002",
+        "name": "container",
+        "parent": "emp001",
+        "children": ["emp003", "emp100"],
+        "settings": {
+          "_maxWidth": "900px",
+          "_display": "flex",
+          "_direction": "column",
+          "_gap": "32px"
+        }
+      },
+      {
+        "id": "emp003",
+        "name": "block",
+        "parent": "emp002",
+        "children": ["emp004"],
+        "settings": {
+          "_background": {"color": {"hex": "#ffffff"}},
+          "_padding": {"top": "40", "right": "40", "bottom": "40", "left": "40"},
+          "_border": {"radius": {"top": "12", "right": "12", "bottom": "12", "left": "12"}},
+          "_boxShadow": {"values": {"offsetX": "0", "offsetY": "2", "blur": "8", "spread": "0", "color": {"rgb": "rgba(0,0,0,0.06)"}}}
+        },
+        "label": "Mitarbeiter-Card"
+      },
+      {
+        "id": "emp004",
+        "name": "block",
+        "parent": "emp003",
+        "children": ["emp005", "emp010"],
+        "settings": {
+          "_display": "flex",
+          "_direction": "row",
+          "_gap": "40px",
+          "_align-items": "center"
+        }
+      },
+      {
+        "id": "emp005",
+        "name": "image",
+        "parent": "emp004",
+        "children": [],
+        "settings": {
+          "image": {"useDynamicData": true, "dynamicData": "{featured_image:employee-thumbnail}"},
+          "_width": "200px",
+          "_height": "200px",
+          "_border": {"radius": {"top": "50%", "right": "50%", "bottom": "50%", "left": "50%"}},
+          "_object-fit": "cover"
+        },
+        "label": "Mitarbeiter-Foto"
+      },
+      {
+        "id": "emp010",
+        "name": "block",
+        "parent": "emp004",
+        "children": ["emp011", "emp012", "emp013", "emp014", "emp015"],
+        "settings": {
+          "_display": "flex",
+          "_direction": "column",
+          "_gap": "12px",
+          "_flex": "1"
+        }
+      },
+      {
+        "id": "emp011",
+        "name": "heading",
+        "parent": "emp010",
+        "children": [],
+        "settings": {
+          "text": "{post_title}",
+          "tag": "h1",
+          "_typography": {
+            "color": {"hex": "#004071"},
+            "font-family": "Mulish",
+            "font-size": "36px",
+            "font-weight": "700",
+            "line-height": "1.2"
+          }
+        }
+      },
+      {
+        "id": "emp012",
+        "name": "text-basic",
+        "parent": "emp010",
+        "children": [],
+        "settings": {
+          "text": "{post_meta:_employee_position}",
+          "tag": "div",
+          "_typography": {
+            "color": {"hex": "#005e9e"},
+            "font-family": "Mulish",
+            "font-size": "18px",
+            "font-weight": "600"
+          },
+          "_margin": {"bottom": "12"}
+        }
+      },
+      {
+        "id": "emp013",
+        "name": "text-basic",
+        "parent": "emp010",
+        "children": [],
+        "settings": {
+          "text": "📞 {post_meta:_employee_telefon}",
+          "tag": "div",
+          "_typography": {
+            "color": {"hex": "#333333"},
+            "font-family": "Mulish",
+            "font-size": "15px"
+          }
+        }
+      },
+      {
+        "id": "emp014",
+        "name": "text-basic",
+        "parent": "emp010",
+        "children": [],
+        "settings": {
+          "text": "📱 {post_meta:_employee_mobil}",
+          "tag": "div",
+          "_typography": {
+            "color": {"hex": "#333333"},
+            "font-family": "Mulish",
+            "font-size": "15px"
+          }
+        }
+      },
+      {
+        "id": "emp015",
+        "name": "text-basic",
+        "parent": "emp010",
+        "children": [],
+        "settings": {
+          "text": "✉️ <a href=\"mailto:{post_meta:_employee_email}\" style=\"color:#005e9e;text-decoration:none;\">{post_meta:_employee_email}</a>",
+          "tag": "div",
+          "_typography": {
+            "color": {"hex": "#333333"},
+            "font-family": "Mulish",
+            "font-size": "15px"
+          }
+        }
+      },
+      {
+        "id": "emp100",
+        "name": "shortcode",
+        "parent": "emp002",
+        "children": [],
+        "settings": {
+          "shortcode": "[mitarbeiter_navigation]"
+        },
+        "label": "Vor/Zurück Navigation"
+      }
+    ],
+    "type": "template",
+    "templateType": "single",
+    "templateSettings": {
+      "templateConditions": [
+        {"main": "postType", "postType": "employee"}
+      ]
+    },
+    "version": "1.10.3"
+  }
+]

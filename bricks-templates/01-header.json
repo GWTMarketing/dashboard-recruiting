@@ -1,0 +1,132 @@
+[
+  {
+    "title": "GWT Header (Sidebar)",
+    "content": [
+      {
+        "id": "hdr001",
+        "name": "section",
+        "parent": "0",
+        "children": ["hdr002"],
+        "settings": {
+          "tag": "header",
+          "_background": {"color": {"hex": "#004071"}},
+          "_width": "280px",
+          "_height": "100vh",
+          "_position": "fixed",
+          "_top": "0",
+          "_left": "0",
+          "_padding": {"top": "32", "right": "20", "bottom": "32", "left": "20"},
+          "_cssGlobalClasses": ["gwt-sidebar"]
+        },
+        "label": "Sidebar"
+      },
+      {
+        "id": "hdr002",
+        "name": "block",
+        "parent": "hdr001",
+        "children": ["hdr003", "hdr004", "hdr099"],
+        "settings": {
+          "_display": "flex",
+          "_direction": "column",
+          "_gap": "24px",
+          "_height": "100%"
+        }
+      },
+      {
+        "id": "hdr003",
+        "name": "heading",
+        "parent": "hdr002",
+        "children": [],
+        "settings": {
+          "text": "GWT Intranet",
+          "tag": "h2",
+          "_typography": {
+            "color": {"hex": "#ffffff"},
+            "font-family": "Mulish",
+            "font-size": "22px",
+            "font-weight": "700",
+            "letter-spacing": "0.5px"
+          },
+          "_margin": {"bottom": "16"}
+        }
+      },
+      {
+        "id": "hdr004",
+        "name": "nav-menu",
+        "parent": "hdr002",
+        "children": [],
+        "settings": {
+          "menu": "hauptmenu",
+          "layout": "vertical",
+          "_typography": {
+            "color": {"hex": "#ffffff"},
+            "font-family": "Mulish",
+            "font-size": "15px",
+            "font-weight": "500"
+          },
+          "menu_item_gap": "8px",
+          "menu_item_padding": {"top": "10", "right": "14", "bottom": "10", "left": "14"},
+          "menu_item_border_radius": "8px",
+          "menu_item_hover_background": {"hex": "#005e9e"},
+          "menu_item_active_background": {"hex": "#c7eafb"},
+          "menu_item_active_color": {"hex": "#004071"}
+        },
+        "label": "Navigation"
+      },
+      {
+        "id": "hdr099",
+        "name": "block",
+        "parent": "hdr002",
+        "children": ["hdr100", "hdr101"],
+        "settings": {
+          "_display": "flex",
+          "_direction": "column",
+          "_gap": "8px",
+          "_margin": {"top": "auto"},
+          "_padding": {"top": "16"},
+          "_border": {"top": {"width": "1", "style": "solid", "color": {"hex": "#005e9e"}}}
+        },
+        "label": "Footer Sidebar"
+      },
+      {
+        "id": "hdr100",
+        "name": "text-basic",
+        "parent": "hdr099",
+        "children": [],
+        "settings": {
+          "text": "{wp_user_display_name}",
+          "tag": "div",
+          "_typography": {
+            "color": {"hex": "#c7eafb"},
+            "font-family": "Mulish",
+            "font-size": "14px",
+            "font-weight": "600"
+          }
+        }
+      },
+      {
+        "id": "hdr101",
+        "name": "button",
+        "parent": "hdr099",
+        "children": [],
+        "settings": {
+          "text": "Abmelden",
+          "link": {"type": "external", "url": "/wp-login.php?action=logout"},
+          "style": "primary",
+          "_background": {"color": {"hex": "#005e9e"}},
+          "_typography": {
+            "color": {"hex": "#ffffff"},
+            "font-family": "Mulish",
+            "font-size": "13px",
+            "font-weight": "600"
+          },
+          "_padding": {"top": "8", "right": "16", "bottom": "8", "left": "16"},
+          "_border": {"radius": {"top": "8", "right": "8", "bottom": "8", "left": "8"}}
+        }
+      }
+    ],
+    "type": "template",
+    "templateType": "header",
+    "version": "1.10.3"
+  }
+]
