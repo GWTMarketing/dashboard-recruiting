@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>GWT Intranet — Schwarzes Brett</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="app">
+
+  <aside class="sidebar">
+    <div class="sidebar__logo">
+      <div class="sidebar__logo-mark">GWT</div>
+      <div class="sidebar__logo-text">Intranet</div>
+    </div>
+    <div class="sidebar__section">Übersicht</div>
+    <nav class="sidebar__nav">
+      <a class="sidebar__item"><span class="sidebar__icon">⌂</span><span>Startseite</span></a>
+      <a class="sidebar__item"><span class="sidebar__icon">📰</span><span>News</span></a>
+      <a class="sidebar__item"><span class="sidebar__icon">🏢</span><span>Abteilungen</span></a>
+      <a class="sidebar__item"><span class="sidebar__icon">👥</span><span>Mitarbeiter</span></a>
+      <a class="sidebar__item sidebar__item--active"><span class="sidebar__icon">📌</span><span>Schwarzes Brett</span></a>
+      <a class="sidebar__item"><span class="sidebar__icon">🗓</span><span>Events</span></a>
+      <a class="sidebar__item"><span class="sidebar__icon">📁</span><span>Dokumente</span></a>
+    </nav>
+    <div class="sidebar__section">Persönlich</div>
+    <nav class="sidebar__nav">
+      <a class="sidebar__item"><span class="sidebar__icon">👤</span><span>Mein Profil</span></a>
+      <a class="sidebar__item"><span class="sidebar__icon">⎋</span><span>Abmelden</span></a>
+    </nav>
+    <div class="sidebar__user">
+      <div class="sidebar__avatar">AM</div>
+      <div>
+        <div class="sidebar__user-name">Anna Müller</div>
+        <div class="sidebar__user-role">Marketing · Wien</div>
+      </div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="topbar">
+      <div class="search"><span>🔍</span><span>Mitarbeiter, News oder Dokumente suchen…</span></div>
+      <div class="topbar__actions">
+        <button class="icon-btn">🔔<span class="icon-btn__dot"></span></button>
+        <button class="icon-btn">✉</button>
+      </div>
+    </div>
+
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:28px;">
+      <div>
+        <h1 class="page-title">Schwarzes Brett</h1>
+        <p class="page-sub" style="margin-bottom:0;">Private Angebote, Gesuche und Events deiner Kolleg:innen</p>
+      </div>
+      <button class="btn" style="width:auto;padding:12px 24px;">+ Neuen Aushang erstellen</button>
+    </div>
+
+    <div class="filters">
+      <div class="filter-chip filter-chip--active">Alle</div>
+      <div class="filter-chip">Verkauf</div>
+      <div class="filter-chip">Gesucht</div>
+      <div class="filter-chip">Verschenken</div>
+      <div class="filter-chip">Event</div>
+      <div class="filter-chip">Fahrgemeinschaft</div>
+      <div class="filter-chip">Sonstiges</div>
+    </div>
+
+    <div class="bulletin" style="grid-template-columns:repeat(3, 1fr);">
+      <div class="bulletin__card">
+        <span class="bulletin__tag">Verkauf</span>
+        <h4 class="bulletin__title">Kinderfahrrad 20" abzugeben</h4>
+        <p class="bulletin__text">Gut erhalten, für Kinder von 6–9 Jahren. Aus Nichtraucher-Haushalt. VB € 80, Besichtigung in Wien möglich.</p>
+        <div style="font-size:12px;color:var(--gwt-muted);">Max Mustermann · IT</div>
+        <div class="bulletin__expiry">Läuft aus: 30. April 2026</div>
+      </div>
+      <div class="bulletin__card">
+        <span class="bulletin__tag">Gesucht</span>
+        <h4 class="bulletin__title">Fahrgemeinschaft Graz ↔ Wien</h4>
+        <p class="bulletin__text">Montags ab 6:30 Uhr, Rückfahrt Freitag Nachmittag. Kostenteilung nach Vereinbarung. Freue mich über Rückmeldungen!</p>
+        <div style="font-size:12px;color:var(--gwt-muted);">Tobias Neuhauser · IT</div>
+        <div class="bulletin__expiry">Läuft aus: 15. Mai 2026</div>
+      </div>
+      <div class="bulletin__card">
+        <span class="bulletin__tag">Event</span>
+        <h4 class="bulletin__title">Lauftreff Donauinsel</h4>
+        <p class="bulletin__text">Jeden Mittwoch 18:00 Uhr, Start beim Schiffsrestaurant. Alle Levels willkommen, ~8 km locker.</p>
+        <div style="font-size:12px;color:var(--gwt-muted);">Sarah Huber · HR</div>
+        <div class="bulletin__expiry">Laufend</div>
+      </div>
+      <div class="bulletin__card">
+        <span class="bulletin__tag">Verschenken</span>
+        <h4 class="bulletin__title">IKEA Malm Kommode 4 Laden</h4>
+        <p class="bulletin__text">Weiß, guter Zustand, leichte Gebrauchsspuren oben. Selbstabholung in 1020 Wien bis Ende April.</p>
+        <div style="font-size:12px;color:var(--gwt-muted);">Julia Wagner · Finance</div>
+        <div class="bulletin__expiry">Läuft aus: 28. April 2026</div>
+      </div>
+      <div class="bulletin__card">
+        <span class="bulletin__tag">Verkauf</span>
+        <h4 class="bulletin__title">PlayStation 5 Disc + 3 Spiele</h4>
+        <p class="bulletin__text">Originalverpackt, Controller + HDMI inkl. Zusätzlich FIFA 25, Spider-Man 2, GT7. € 480 VB.</p>
+        <div style="font-size:12px;color:var(--gwt-muted);">Peter Hofer · Sales</div>
+        <div class="bulletin__expiry">Läuft aus: 10. Mai 2026</div>
+      </div>
+      <div class="bulletin__card">
+        <span class="bulletin__tag">Gesucht</span>
+        <h4 class="bulletin__title">Babysitter für Fr.-Abend</h4>
+        <p class="bulletin__text">Suche zuverlässige Person für gelegentliches Babysitting in 1180 Wien (2 Kinder, 4 + 7 Jahre).</p>
+        <div style="font-size:12px;color:var(--gwt-muted);">Christina Reiter · Marketing</div>
+        <div class="bulletin__expiry">Läuft aus: 31. Mai 2026</div>
+      </div>
+    </div>
+
+    <div style="text-align:center;margin-top:32px;">
+      <button class="btn btn--ghost" style="max-width:240px;display:inline-block;width:auto;padding:12px 32px;">Mehr laden</button>
+    </div>
+
+  </main>
+</div>
+</body>
+</html>

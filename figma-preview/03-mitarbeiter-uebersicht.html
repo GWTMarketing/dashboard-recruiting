@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>GWT Intranet — Mitarbeiter</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="app">
+
+  <aside class="sidebar">
+    <div class="sidebar__logo">
+      <div class="sidebar__logo-mark">GWT</div>
+      <div class="sidebar__logo-text">Intranet</div>
+    </div>
+    <div class="sidebar__section">Übersicht</div>
+    <nav class="sidebar__nav">
+      <a class="sidebar__item"><span class="sidebar__icon">⌂</span><span>Startseite</span></a>
+      <a class="sidebar__item"><span class="sidebar__icon">📰</span><span>News</span></a>
+      <a class="sidebar__item"><span class="sidebar__icon">🏢</span><span>Abteilungen</span></a>
+      <a class="sidebar__item sidebar__item--active"><span class="sidebar__icon">👥</span><span>Mitarbeiter</span></a>
+      <a class="sidebar__item"><span class="sidebar__icon">📌</span><span>Schwarzes Brett</span></a>
+      <a class="sidebar__item"><span class="sidebar__icon">🗓</span><span>Events</span></a>
+      <a class="sidebar__item"><span class="sidebar__icon">📁</span><span>Dokumente</span></a>
+    </nav>
+    <div class="sidebar__section">Persönlich</div>
+    <nav class="sidebar__nav">
+      <a class="sidebar__item"><span class="sidebar__icon">👤</span><span>Mein Profil</span></a>
+      <a class="sidebar__item"><span class="sidebar__icon">⎋</span><span>Abmelden</span></a>
+    </nav>
+    <div class="sidebar__user">
+      <div class="sidebar__avatar">AM</div>
+      <div>
+        <div class="sidebar__user-name">Anna Müller</div>
+        <div class="sidebar__user-role">Marketing · Wien</div>
+      </div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="topbar">
+      <div class="search"><span>🔍</span><span>Mitarbeiter, News oder Dokumente suchen…</span></div>
+      <div class="topbar__actions">
+        <button class="icon-btn">🔔<span class="icon-btn__dot"></span></button>
+        <button class="icon-btn">✉</button>
+      </div>
+    </div>
+
+    <h1 class="page-title">Mitarbeiter</h1>
+    <p class="page-sub">396 Kolleg:innen an 5 Standorten</p>
+
+    <div class="filters">
+      <span style="font-size:13px;font-weight:700;color:var(--gwt-muted);margin-right:4px;">Standort:</span>
+      <div class="filter-chip filter-chip--active">Alle</div>
+      <div class="filter-chip">Wien</div>
+      <div class="filter-chip">Graz</div>
+      <div class="filter-chip">Linz</div>
+      <div class="filter-chip">Salzburg</div>
+      <div class="filter-chip">Innsbruck</div>
+      <div style="width:16px;"></div>
+      <span style="font-size:13px;font-weight:700;color:var(--gwt-muted);margin-right:4px;">Abteilung:</span>
+      <div class="filter-chip filter-chip--active">Alle</div>
+      <div class="filter-chip">IT</div>
+      <div class="filter-chip">Marketing</div>
+      <div class="filter-chip">HR</div>
+      <div class="filter-chip">Sales</div>
+      <div class="filter-chip">Finance</div>
+    </div>
+
+    <div class="employees">
+      <div class="emp-card">
+        <div class="emp-card__avatar" style="background:linear-gradient(135deg,#ffd59e,#ff8b6b);">MM</div>
+        <div class="emp-card__name">Max Mustermann</div>
+        <div class="emp-card__pos">Senior Software Engineer</div>
+        <div class="emp-card__tags"><span class="tag">IT</span><span class="tag">Wien</span></div>
+      </div>
+      <div class="emp-card">
+        <div class="emp-card__avatar">LK</div>
+        <div class="emp-card__name">Lisa Krüger</div>
+        <div class="emp-card__pos">Engineering Lead</div>
+        <div class="emp-card__tags"><span class="tag">IT</span><span class="tag">Wien</span></div>
+      </div>
+      <div class="emp-card">
+        <div class="emp-card__avatar" style="background:linear-gradient(135deg,#bee6c9,#3a9e5a);">TN</div>
+        <div class="emp-card__name">Tobias Neuhauser</div>
+        <div class="emp-card__pos">DevOps Engineer</div>
+        <div class="emp-card__tags"><span class="tag">IT</span><span class="tag">Graz</span></div>
+      </div>
+      <div class="emp-card">
+        <div class="emp-card__avatar" style="background:linear-gradient(135deg,#e2c7fb,#8448c9);">SH</div>
+        <div class="emp-card__name">Sarah Huber</div>
+        <div class="emp-card__pos">HR Business Partner</div>
+        <div class="emp-card__tags"><span class="tag">HR</span><span class="tag">Wien</span></div>
+      </div>
+      <div class="emp-card">
+        <div class="emp-card__avatar">AM</div>
+        <div class="emp-card__name">Anna Müller</div>
+        <div class="emp-card__pos">Marketing Manager</div>
+        <div class="emp-card__tags"><span class="tag">Marketing</span><span class="tag">Wien</span></div>
+      </div>
+      <div class="emp-card">
+        <div class="emp-card__avatar" style="background:linear-gradient(135deg,#ffd59e,#ff8b6b);">MF</div>
+        <div class="emp-card__name">Maria Fischer</div>
+        <div class="emp-card__pos">UX Designer</div>
+        <div class="emp-card__tags"><span class="tag">Marketing</span><span class="tag">Linz</span></div>
+      </div>
+      <div class="emp-card">
+        <div class="emp-card__avatar" style="background:linear-gradient(135deg,#bee6c9,#3a9e5a);">TB</div>
+        <div class="emp-card__name">Thomas Berger</div>
+        <div class="emp-card__pos">Account Manager</div>
+        <div class="emp-card__tags"><span class="tag">Sales</span><span class="tag">Salzburg</span></div>
+      </div>
+      <div class="emp-card">
+        <div class="emp-card__avatar">LS</div>
+        <div class="emp-card__name">Lukas Schneider</div>
+        <div class="emp-card__pos">Software Engineer</div>
+        <div class="emp-card__tags"><span class="tag">IT</span><span class="tag">Wien</span></div>
+      </div>
+      <div class="emp-card">
+        <div class="emp-card__avatar" style="background:linear-gradient(135deg,#e2c7fb,#8448c9);">JW</div>
+        <div class="emp-card__name">Julia Wagner</div>
+        <div class="emp-card__pos">Controller</div>
+        <div class="emp-card__tags"><span class="tag">Finance</span><span class="tag">Wien</span></div>
+      </div>
+      <div class="emp-card">
+        <div class="emp-card__avatar">PH</div>
+        <div class="emp-card__name">Peter Hofer</div>
+        <div class="emp-card__pos">Sales Director</div>
+        <div class="emp-card__tags"><span class="tag">Sales</span><span class="tag">Graz</span></div>
+      </div>
+      <div class="emp-card">
+        <div class="emp-card__avatar" style="background:linear-gradient(135deg,#ffd59e,#ff8b6b);">CR</div>
+        <div class="emp-card__name">Christina Reiter</div>
+        <div class="emp-card__pos">Content Strategin</div>
+        <div class="emp-card__tags"><span class="tag">Marketing</span><span class="tag">Wien</span></div>
+      </div>
+      <div class="emp-card">
+        <div class="emp-card__avatar" style="background:linear-gradient(135deg,#bee6c9,#3a9e5a);">DB</div>
+        <div class="emp-card__name">David Bauer</div>
+        <div class="emp-card__pos">Product Manager</div>
+        <div class="emp-card__tags"><span class="tag">IT</span><span class="tag">Linz</span></div>
+      </div>
+    </div>
+
+    <div style="text-align:center;margin-top:32px;">
+      <button class="btn" style="max-width:240px;display:inline-block;width:auto;padding:12px 32px;">Mehr laden</button>
+    </div>
+
+  </main>
+</div>
+</body>
+</html>

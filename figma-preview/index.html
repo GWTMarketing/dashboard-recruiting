@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>GWT Intranet — Design Preview</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+  body { padding: 60px; }
+  .nav-wrap { max-width: 980px; margin: 0 auto; }
+  .nav-title {
+    font-size: 48px; font-weight: 800; letter-spacing: -0.035em;
+    line-height: 1.05; margin-bottom: 12px;
+  }
+  .nav-sub { color: var(--gwt-muted); font-size: 17px; margin-bottom: 48px; }
+  .nav-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  .nav-card {
+    background: #fff;
+    border: 1px solid var(--gwt-border);
+    border-radius: 16px;
+    padding: 28px;
+    box-shadow: var(--gwt-shadow);
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .nav-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--gwt-shadow-lg);
+    border-color: var(--gwt-secondary);
+  }
+  .nav-num {
+    font-size: 12px; font-weight: 800; letter-spacing: 0.1em;
+    color: var(--gwt-secondary); text-transform: uppercase;
+  }
+  .nav-card__title {
+    font-size: 26px; font-weight: 800; letter-spacing: -0.028em;
+    margin: 8px 0 10px;
+  }
+  .nav-card__desc { color: var(--gwt-muted); font-size: 14px; line-height: 1.5; }
+  .palette { display: flex; gap: 12px; margin-top: 40px; }
+  .swatch {
+    flex: 1;
+    height: 100px;
+    border-radius: 12px;
+    display: flex;
+    align-items: flex-end;
+    padding: 14px;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+  }
+</style>
+</head>
+<body>
+<div class="nav-wrap">
+
+  <div class="nav-num">GWT GROUP · INTRANET</div>
+  <h1 class="nav-title">Design Preview</h1>
+  <p class="nav-sub">
+    Alle 5 Seiten des neuen Intranet-Designs. Pixelgenau, in Mulish,
+    mit der GWT-Farbpalette. Jede Seite ist eigenständig und kann
+    mit dem Figma-Plugin <strong>html.to.design</strong> als Frame
+    in dein Figma-File importiert werden.
+  </p>
+
+  <div class="nav-grid">
+    <a class="nav-card" href="01-startseite.html">
+      <div class="nav-num">01</div>
+      <div class="nav-card__title">Startseite</div>
+      <div class="nav-card__desc">Dashboard mit Welcome-Hero, Wetter-Widget, News, "Neu im Team" und Schwarzem Brett.</div>
+    </a>
+    <a class="nav-card" href="02-mitarbeiter-profil.html">
+      <div class="nav-num">02</div>
+      <div class="nav-card__title">Mitarbeiter-Profil</div>
+      <div class="nav-card__desc">Einzelne Mitarbeiter-Seite mit Foto, Kontaktdaten, Abteilungs-Badges und Vor/Zurück-Navigation.</div>
+    </a>
+    <a class="nav-card" href="03-mitarbeiter-uebersicht.html">
+      <div class="nav-num">03</div>
+      <div class="nav-card__title">Mitarbeiter-Übersicht</div>
+      <div class="nav-card__desc">Grid-Ansicht aller Kolleg:innen mit Filterleiste (Standort + Abteilung) und Load-More.</div>
+    </a>
+    <a class="nav-card" href="04-schwarzes-brett.html">
+      <div class="nav-num">04</div>
+      <div class="nav-card__title">Schwarzes Brett</div>
+      <div class="nav-card__desc">Aushänge-Übersicht mit Kategorie-Tags, Ablaufdatum und "Neuen Aushang erstellen"-CTA.</div>
+    </a>
+    <a class="nav-card" href="05-login.html" style="grid-column: span 2;">
+      <div class="nav-num">05</div>
+      <div class="nav-card__title">Login</div>
+      <div class="nav-card__desc">Zwei-Spalten-Login mit Hero-Panel (Stats) und AD-SSO-Option für September 2026.</div>
+    </a>
+  </div>
+
+  <div style="margin-top:64px;">
+    <h3 class="section-title">Farb-Palette</h3>
+    <div class="palette">
+      <div class="swatch" style="background:#004071;">#004071<br><span style="opacity:.7;">Primary</span></div>
+      <div class="swatch" style="background:#005e9e;">#005e9e<br><span style="opacity:.7;">Secondary</span></div>
+      <div class="swatch" style="background:#c7eafb;color:#004071;">#c7eafb<br><span style="opacity:.7;">Accent</span></div>
+      <div class="swatch" style="background:#f5f7fa;color:#0a2540;border:1px solid var(--gwt-border);">#f5f7fa<br><span style="opacity:.7;">Background</span></div>
+      <div class="swatch" style="background:#0a2540;">#0a2540<br><span style="opacity:.7;">Text</span></div>
+    </div>
+  </div>
+
+  <div style="margin-top:48px;font-size:13px;color:var(--gwt-muted);line-height:1.7;">
+    <strong style="color:var(--gwt-text);">Typografie:</strong> Mulish (Google Fonts) — Weights 400, 600, 700, 800, 900 · Letter-Spacing -0.03em für Headlines (Apple-Style)<br>
+    <strong style="color:var(--gwt-text);">Radius:</strong> 16px Cards · 12px Inputs · 10px Sidebar-Items · 999px Tags<br>
+    <strong style="color:var(--gwt-text);">Shadow:</strong> 0 2px 8px rgba(0,64,113,0.06) Standard · 0 8px 32px rgba(0,64,113,0.08) Hover/Hero
+  </div>
+</div>
+</body>
+</html>

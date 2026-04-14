@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>GWT Intranet — Mitarbeiter-Profil</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="app">
+
+  <aside class="sidebar">
+    <div class="sidebar__logo">
+      <div class="sidebar__logo-mark">GWT</div>
+      <div class="sidebar__logo-text">Intranet</div>
+    </div>
+    <div class="sidebar__section">Übersicht</div>
+    <nav class="sidebar__nav">
+      <a class="sidebar__item"><span class="sidebar__icon">⌂</span><span>Startseite</span></a>
+      <a class="sidebar__item"><span class="sidebar__icon">📰</span><span>News</span></a>
+      <a class="sidebar__item"><span class="sidebar__icon">🏢</span><span>Abteilungen</span></a>
+      <a class="sidebar__item sidebar__item--active"><span class="sidebar__icon">👥</span><span>Mitarbeiter</span></a>
+      <a class="sidebar__item"><span class="sidebar__icon">📌</span><span>Schwarzes Brett</span></a>
+      <a class="sidebar__item"><span class="sidebar__icon">🗓</span><span>Events</span></a>
+      <a class="sidebar__item"><span class="sidebar__icon">📁</span><span>Dokumente</span></a>
+    </nav>
+    <div class="sidebar__section">Persönlich</div>
+    <nav class="sidebar__nav">
+      <a class="sidebar__item"><span class="sidebar__icon">👤</span><span>Mein Profil</span></a>
+      <a class="sidebar__item"><span class="sidebar__icon">⎋</span><span>Abmelden</span></a>
+    </nav>
+    <div class="sidebar__user">
+      <div class="sidebar__avatar">AM</div>
+      <div>
+        <div class="sidebar__user-name">Anna Müller</div>
+        <div class="sidebar__user-role">Marketing · Wien</div>
+      </div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="topbar">
+      <div class="search"><span>🔍</span><span>Mitarbeiter, News oder Dokumente suchen…</span></div>
+      <div class="topbar__actions">
+        <button class="icon-btn">🔔<span class="icon-btn__dot"></span></button>
+        <button class="icon-btn">✉</button>
+      </div>
+    </div>
+
+    <a class="profile__backlink">← Zurück zu Abteilung IT</a>
+
+    <section class="card" style="padding:0;overflow:hidden;">
+      <div class="profile">
+        <div>
+          <div class="profile__photo">MM</div>
+          <div class="profile__badges" style="justify-content:center;margin-top:24px;">
+            <span class="profile__badge">IT</span>
+            <span class="profile__badge">Wien</span>
+          </div>
+        </div>
+
+        <div>
+          <h1 class="profile__name">Max Mustermann</h1>
+          <p class="profile__position">Senior Software Engineer</p>
+
+          <div class="profile__contact">
+            <div class="profile__row">
+              <span class="profile__row-label">Telefon</span>
+              <span class="profile__row-value">+43 1 234 5678</span>
+            </div>
+            <div class="profile__row">
+              <span class="profile__row-label">Mobil</span>
+              <span class="profile__row-value">+43 664 123 4567</span>
+            </div>
+            <div class="profile__row">
+              <span class="profile__row-label">E-Mail</span>
+              <span class="profile__row-value">m.mustermann@gwt-group.at</span>
+            </div>
+            <div class="profile__row">
+              <span class="profile__row-label">Standort</span>
+              <span class="profile__row-value">Wien · Büro 3.12</span>
+            </div>
+            <div class="profile__row">
+              <span class="profile__row-label">Team</span>
+              <span class="profile__row-value">Backend Engineering</span>
+            </div>
+            <div class="profile__row">
+              <span class="profile__row-label">Eintritt</span>
+              <span class="profile__row-value">März 2022</span>
+            </div>
+          </div>
+
+          <div class="divider"></div>
+
+          <div style="color:var(--gwt-muted);font-size:14px;line-height:1.6;max-width:520px;">
+            Max leitet das Backend-Team und ist Ansprechpartner für unsere SAGE-DPW-Integration und die internen APIs. In seiner Freizeit findet man ihn am Rad oder beim Wandern.
+          </div>
+
+          <div class="profile__nav">
+            <button class="profile__nav-btn">
+              <span class="profile__nav-arrow">←</span>
+              <div style="text-align:left;">
+                <div style="font-size:11px;color:var(--gwt-muted);text-transform:uppercase;letter-spacing:.08em;">Vorherige/r</div>
+                <div>Lisa Krüger</div>
+              </div>
+            </button>
+            <button class="profile__nav-btn">
+              <div style="text-align:right;">
+                <div style="font-size:11px;color:var(--gwt-muted);text-transform:uppercase;letter-spacing:.08em;">Nächste/r</div>
+                <div>Tobias Neuhauser</div>
+              </div>
+              <span class="profile__nav-arrow">→</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+</body>
+</html>
