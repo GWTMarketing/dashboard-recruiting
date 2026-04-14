@@ -1,10 +1,10 @@
 {
   "content": [
     {
-      "id": "ss4001",
+      "id": "ss5001",
       "name": "section",
       "parent": 0,
-      "children": ["ss4002"],
+      "children": ["ss5002"],
       "settings": {
         "_padding": { "top": "56", "bottom": "80", "left": "48", "right": "48" },
         "_background": { "color": { "hex": "#f5f7fa" } },
@@ -13,10 +13,10 @@
       "label": "GWT Startseite"
     },
     {
-      "id": "ss4002",
+      "id": "ss5002",
       "name": "container",
-      "parent": "ss4001",
-      "children": ["ss4003", "ss4004", "ss4010", "ss4050"],
+      "parent": "ss5001",
+      "children": ["ss5003", "ss5004", "ss5010", "ss5050"],
       "settings": {
         "_direction": "column",
         "_rowGap": "40px",
@@ -25,9 +25,9 @@
       }
     },
     {
-      "id": "ss4003",
+      "id": "ss5003",
       "name": "heading",
-      "parent": "ss4002",
+      "parent": "ss5002",
       "children": [],
       "settings": {
         "text": "Willkommen, {wp_user_first_name}",
@@ -45,9 +45,9 @@
       "label": "Headline"
     },
     {
-      "id": "ss4004",
+      "id": "ss5004",
       "name": "text-basic",
-      "parent": "ss4002",
+      "parent": "ss5002",
       "children": [],
       "settings": {
         "text": "Dein internes Dashboard – immer auf dem Laufenden.",
@@ -63,23 +63,23 @@
       "label": "Subtitle"
     },
     {
-      "id": "ss4010",
+      "id": "ss5010",
       "name": "block",
-      "parent": "ss4002",
-      "children": ["ss4011", "ss4030"],
+      "parent": "ss5002",
+      "children": ["ss5011", "ss5030"],
       "settings": {
         "_display": "grid",
         "_gridTemplateColumns": "1fr 2fr",
         "_columnGap": "32px",
         "_rowGap": "32px"
       },
-      "label": "Main Grid: Left Col + News"
+      "label": "Main Grid"
     },
     {
-      "id": "ss4011",
+      "id": "ss5011",
       "name": "block",
-      "parent": "ss4010",
-      "children": ["ss4012", "ss4020"],
+      "parent": "ss5010",
+      "children": ["ss5012", "ss5020"],
       "settings": {
         "_display": "flex",
         "_direction": "column",
@@ -88,10 +88,10 @@
       "label": "Left Column"
     },
     {
-      "id": "ss4012",
+      "id": "ss5012",
       "name": "block",
-      "parent": "ss4011",
-      "children": ["ss4013", "ss4014"],
+      "parent": "ss5011",
+      "children": ["ss5013", "ss5014"],
       "settings": {
         "_padding": { "top": "28", "bottom": "28", "left": "28", "right": "28" },
         "_background": { "color": { "hex": "#ffffff" } },
@@ -104,9 +104,9 @@
       "label": "Wetter-Card"
     },
     {
-      "id": "ss4013",
+      "id": "ss5013",
       "name": "heading",
-      "parent": "ss4012",
+      "parent": "ss5012",
       "children": [],
       "settings": {
         "text": "Wetter",
@@ -123,17 +123,17 @@
       }
     },
     {
-      "id": "ss4014",
+      "id": "ss5014",
       "name": "shortcode",
-      "parent": "ss4012",
+      "parent": "ss5012",
       "children": [],
       "settings": { "shortcode": "[wetter_widget]" }
     },
     {
-      "id": "ss4020",
+      "id": "ss5020",
       "name": "block",
-      "parent": "ss4011",
-      "children": ["ss4021", "ss4022"],
+      "parent": "ss5011",
+      "children": ["ss5021", "ss5022"],
       "settings": {
         "_padding": { "top": "28", "bottom": "28", "left": "28", "right": "28" },
         "_background": { "color": { "hex": "#ffffff" } },
@@ -143,12 +143,12 @@
           "color": { "hex": "#0000000a" }
         }
       },
-      "label": "Welcome on Board"
+      "label": "Neu im Team"
     },
     {
-      "id": "ss4021",
+      "id": "ss5021",
       "name": "heading",
-      "parent": "ss4020",
+      "parent": "ss5020",
       "children": [],
       "settings": {
         "text": "Neu im Team",
@@ -165,17 +165,17 @@
       }
     },
     {
-      "id": "ss4022",
+      "id": "ss5022",
       "name": "shortcode",
-      "parent": "ss4020",
+      "parent": "ss5020",
       "children": [],
-      "settings": { "shortcode": "[welcome_bereich layout=\"list\" anzahl=\"8\" monate=\"2\"]" }
+      "settings": { "shortcode": "[welcome_liste anzahl=\"8\" monate=\"2\"]" }
     },
     {
-      "id": "ss4030",
+      "id": "ss5030",
       "name": "block",
-      "parent": "ss4010",
-      "children": ["ss4031", "ss4032"],
+      "parent": "ss5010",
+      "children": ["ss5031", "ss5032"],
       "settings": {
         "_padding": { "top": "32", "bottom": "32", "left": "32", "right": "32" },
         "_background": { "color": { "hex": "#ffffff" } },
@@ -188,9 +188,9 @@
       "label": "News-Card"
     },
     {
-      "id": "ss4031",
+      "id": "ss5031",
       "name": "heading",
-      "parent": "ss4030",
+      "parent": "ss5030",
       "children": [],
       "settings": {
         "text": "Aktuelle News",
@@ -207,44 +207,28 @@
       }
     },
     {
-      "id": "ss4032",
+      "id": "ss5032",
       "name": "posts",
-      "parent": "ss4030",
+      "parent": "ss5030",
       "children": [],
       "settings": {
         "query": {
           "post_type": ["post"],
-          "posts_per_page": "4",
+          "posts_per_page": "3",
           "orderby": "date",
           "order": "DESC"
         },
-        "layout": "masonry",
-        "columns": "2",
-        "gutter": "20",
-        "title": {
-          "tag": "h3",
-          "_typography": {
-            "font-family": "Mulish",
-            "font-size": "22px",
-            "font-weight": "700",
-            "line-height": "1.2",
-            "letter-spacing": "-0.02em",
-            "color": { "hex": "#0a2540" }
-          }
-        },
+        "title": { "tag": "h3" },
         "excerptLength": "18",
-        "pagination": true,
-        "paginationType": "load-more",
-        "paginationLoadMoreText": "Mehr laden",
         "_cssGlobalClasses": ["gwt-news-posts"]
       },
       "label": "News Posts"
     },
     {
-      "id": "ss4050",
+      "id": "ss5050",
       "name": "block",
-      "parent": "ss4002",
-      "children": ["ss4051", "ss4052"],
+      "parent": "ss5002",
+      "children": ["ss5051", "ss5052"],
       "settings": {
         "_padding": { "top": "32", "bottom": "32", "left": "32", "right": "32" },
         "_background": { "color": { "hex": "#ffffff" } },
@@ -257,9 +241,9 @@
       "label": "Schwarzes Brett"
     },
     {
-      "id": "ss4051",
+      "id": "ss5051",
       "name": "heading",
-      "parent": "ss4050",
+      "parent": "ss5050",
       "children": [],
       "settings": {
         "text": "Schwarzes Brett",
@@ -276,9 +260,9 @@
       }
     },
     {
-      "id": "ss4052",
+      "id": "ss5052",
       "name": "posts",
-      "parent": "ss4050",
+      "parent": "ss5050",
       "children": [],
       "settings": {
         "query": {
@@ -287,21 +271,9 @@
           "orderby": "date",
           "order": "DESC"
         },
-        "layout": "masonry",
-        "columns": "3",
-        "gutter": "20",
-        "title": {
-          "tag": "h4",
-          "_typography": {
-            "font-family": "Mulish",
-            "font-size": "18px",
-            "font-weight": "700",
-            "line-height": "1.25",
-            "letter-spacing": "-0.015em",
-            "color": { "hex": "#0a2540" }
-          }
-        },
-        "excerptLength": "14"
+        "title": { "tag": "h4" },
+        "excerptLength": "14",
+        "_cssGlobalClasses": ["gwt-bulletin-posts"]
       }
     }
   ],

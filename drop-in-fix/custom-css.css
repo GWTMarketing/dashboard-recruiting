@@ -1,21 +1,19 @@
 /* ============================================================ *
- * GWT Intranet – Apple-Premium Polish CSS
+ * GWT Intranet – Custom CSS
  * ============================================================
  * Einfuegen in: WP Admin → Design → Customizer → Zusaetzliches CSS
- * ODER in Bricks → Settings → Custom Code → Custom CSS
+ * ODER: Bricks → Settings → Custom Code → Custom CSS
  * ============================================================ */
 
-/* ---------- 1. Weisser Rand oben entfernen --------------------- */
+/* ---------- 1. Weisser Rand oben entfernen -------------------- */
 html, body { margin: 0 !important; padding: 0 !important; }
-body { background: #f5f7fa; }
+body.bricks-is-frontend { background: #f5f7fa; }
 
 /* ---------- 2. Apple-Style Post-Titel im News-Block ----------- */
-.gwt-news-posts .brxe-post-title,
 .gwt-news-posts h3,
 .gwt-news-posts h3 a,
-.brxe-posts h3 a,
-.brxe-posts h4 a,
-.brxe-post-title a {
+.gwt-news-posts .brxe-post-title,
+.gwt-news-posts .brxe-post-title a {
 	font-family: 'Mulish', -apple-system, BlinkMacSystemFont, sans-serif !important;
 	font-size: 22px !important;
 	font-weight: 700 !important;
@@ -25,90 +23,90 @@ body { background: #f5f7fa; }
 	text-decoration: none !important;
 	transition: color .15s ease;
 }
-.gwt-news-posts .brxe-post-title a:hover,
-.brxe-posts h3 a:hover,
-.brxe-posts h4 a:hover {
-	color: #004071 !important;
-}
+.gwt-news-posts h3 a:hover,
+.gwt-news-posts .brxe-post-title a:hover { color: #004071 !important; }
+
 .gwt-news-posts .brxe-post-excerpt,
-.brxe-posts .brxe-post-excerpt p {
+.gwt-news-posts .brxe-post-excerpt p {
 	font-family: 'Mulish', sans-serif !important;
 	font-size: 14px !important;
 	line-height: 1.55 !important;
 	color: #6b7280 !important;
-	letter-spacing: -0.005em !important;
 	margin-top: 8px !important;
 }
 
-/* Post-Thumbnails abgerundet, nicht full-bleed */
-.brxe-posts .brxe-post-thumbnail,
-.brxe-posts .bricks-post-thumbnail {
-	border-radius: 10px !important;
-	overflow: hidden !important;
-	aspect-ratio: 16/9 !important;
-}
-.brxe-posts .brxe-post-thumbnail img {
-	width: 100% !important;
-	height: 100% !important;
-	object-fit: cover !important;
-	border-radius: 10px !important;
+/* Schwarzes-Brett Titel etwas kleiner */
+.gwt-bulletin-posts h4,
+.gwt-bulletin-posts h4 a {
+	font-family: 'Mulish', sans-serif !important;
+	font-size: 18px !important;
+	font-weight: 700 !important;
+	line-height: 1.25 !important;
+	letter-spacing: -0.015em !important;
+	color: #0a2540 !important;
+	text-decoration: none !important;
 }
 
-/* ---------- 3. "Mehr laden" Button Styling -------------------- */
+/* ---------- 3. "Mehr laden" Button – SICHTBAR und schoen ------ */
 .brxe-posts .bricks-pagination-loadmore,
-.bricks-pagination-loadmore,
-.brxe-posts button.bricks-pagination-loadmore {
+.brxe-posts button.bricks-pagination-loadmore,
+.brxe-posts .bricks-pagination a.page-numbers,
+.brxe-posts .infinite-scroll-button,
+.brxe-posts [class*="load-more"],
+.brxe-posts [class*="loadmore"] {
+	display: inline-block !important;
 	font-family: 'Mulish', sans-serif !important;
 	font-size: 14px !important;
 	font-weight: 700 !important;
 	color: #004071 !important;
-	background: transparent !important;
+	background: #ffffff !important;
 	border: 1.5px solid #c7eafb !important;
 	border-radius: 10px !important;
-	padding: 10px 22px !important;
-	margin-top: 24px !important;
+	padding: 12px 24px !important;
+	margin: 24px auto 0 !important;
 	cursor: pointer !important;
 	transition: all .15s ease !important;
 	letter-spacing: -0.005em !important;
+	text-decoration: none !important;
 }
-.bricks-pagination-loadmore:hover {
+.brxe-posts .bricks-pagination-loadmore:hover,
+.brxe-posts .bricks-pagination a.page-numbers:hover,
+.brxe-posts [class*="loadmore"]:hover {
 	background: #004071 !important;
 	color: #ffffff !important;
 	border-color: #004071 !important;
 }
-
-/* ---------- 4. Schwarzes-Brett-Cards --------------------------- */
-.brxe-posts[data-post-type="bulletin_board"] > * {
-	background: #f9fafb;
-	border-radius: 12px;
-	padding: 20px;
+.brxe-posts .bricks-pagination {
+	text-align: center !important;
+	margin-top: 24px !important;
 }
 
-/* ---------- 5. Dezente Card-Hover-Effekte --------------------- */
-.brxe[class*="-card"],
-.brxe-block {
-	transition: transform .18s ease, box-shadow .18s ease;
+/* ---------- 4. Featured Images abgerundet --------------------- */
+.brxe-posts .brxe-post-thumbnail,
+.brxe-posts .bricks-post-thumbnail {
+	border-radius: 10px !important;
+	overflow: hidden !important;
+}
+.brxe-posts .brxe-post-thumbnail img {
+	border-radius: 10px !important;
 }
 
-/* ---------- 6. Typografie Fine-Tuning ------------------------- */
-body, p, span, li, a {
-	font-family: 'Mulish', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+/* ---------- 5. Typografie Fine-Tuning (Apple-Feel) ------------ */
+body, p, span, li, a, button {
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
-	letter-spacing: -0.003em;
 }
 h1, h2, h3, h4 {
 	font-family: 'Mulish', -apple-system, BlinkMacSystemFont, sans-serif !important;
 	-webkit-font-smoothing: antialiased;
 }
 
-/* ---------- 7. Link-Underline weg (modern) -------------------- */
-.brxe-posts a { text-decoration: none !important; }
+/* ---------- 6. Card-Hover dezent ------------------------------ */
+.brxe-block[class*="Card"]:hover,
+.brxe-block[data-label*="Card"]:hover {
+	box-shadow: 0 4px 12px rgba(0,64,113,0.06) !important;
+	transition: box-shadow .2s ease;
+}
 
-/* ---------- 8. Wetter-Widget Polish --------------------------- */
-#gwt-weather .gwt-weather-day {
-	transition: transform .15s ease;
-}
-#gwt-weather .gwt-weather-day:hover {
-	transform: translateY(-2px);
-}
+/* ---------- 7. Welcome-Liste Fix ------------------------------ */
+.gwt-welcome-liste a { padding: 10px 8px !important; }
